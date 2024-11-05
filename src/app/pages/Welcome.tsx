@@ -1,10 +1,10 @@
 import {Space} from 'antd';
 import {memo} from 'react';
 
-import useAccount from '@/store/account/account';
-import List from '@/app/components/Modules/List';
 import WideContainer from '@/app/components/Layout/WideContainer';
+import List from '@/app/components/Modules/List';
 import Title from '@/app/components/Utils/Title';
+import useAccount from '@/store/account/account';
 
 const Welcome = memo((): JSX.Element | null => {
     const account = useAccount(state => state.account);

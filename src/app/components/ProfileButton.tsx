@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import {Avatar, Button, Col, Divider, Popover, Row, Space, Typography} from 'antd';
 import {memo, useMemo} from 'react';
 import {Link} from 'react-router-dom';
+
 import useAccount from '@/store/account/account';
 
 interface ProfileButtonProps {
@@ -20,21 +21,6 @@ const Content = styled.div`
         margin: 0.75rem 0;
         margin-left: -1rem;
         width: calc(100% + 2rem); //don't ask why
-    }
-`;
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1rem;
-    flex-shrink: 0;
-    font-size: 20px;
-    color: #fff;
-
-    &:hover {
-        background-color: var(--color-primary);
     }
 `;
 
@@ -109,7 +95,9 @@ const ProfileButton = memo<ProfileButtonProps>(({simple = false}): JSX.Element |
             <Space align="start" size={4}>
                 <Space className="text-xs leading-5" direction="vertical" size={4}>
                     <Text className="flex items-center text-black font-semibold">
-                        {account?.user.first_name}&nbsp;{account?.user.last_name}
+                        {account?.user.first_name}
+                        &nbsp;
+                        {account?.user.last_name}
                     </Text>
 
                     <Text type="secondary">{account?.user.id}</Text>

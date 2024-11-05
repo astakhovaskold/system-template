@@ -1,5 +1,6 @@
-import React, {memo, useCallback} from 'react';
 import {Input} from 'antd';
+import {memo, useCallback} from 'react';
+
 import useFilterPagination from '@/hooks/pagination/useFilterPagination';
 
 interface SearchFieldProps {
@@ -22,7 +23,7 @@ const SearchField = memo<SearchFieldProps>(({url}): JSX.Element | null => {
 
     const onClear = useCallback(() => {
         setFilter({search: undefined});
-    }, []);
+    }, [setFilter]);
 
     return <Search placeholder="Search" onSearch={onSearch} onClear={onClear} allowClear />;
 });

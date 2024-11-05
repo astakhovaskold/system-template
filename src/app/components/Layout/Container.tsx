@@ -1,8 +1,9 @@
-import React, {memo, PropsWithChildren} from 'react';
-import Sidebar from '@/app/components/Layout/Sidebar/Sidebar';
 import {Layout} from 'antd';
+import {memo, PropsWithChildren} from 'react';
+
 import Header from '@/app/components/Layout/Header/Header';
-import {Outlet} from 'react-router';
+import Sidebar from '@/app/components/Layout/Sidebar/Sidebar';
+
 import {useAuth} from '@/hooks/useAuth';
 
 interface ContainerProps {

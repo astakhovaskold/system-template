@@ -1,10 +1,11 @@
-import React, {useCallback} from 'react';
-import {Segmented, SegmentedProps} from 'antd';
-import {Status, StatusFilterLabel} from '@/app/components/StatusFilter/types';
-import Label from '@/app/components/StatusFilter/Label';
-import useFilterPagination from '@/hooks/pagination/useFilterPagination';
-import {SegmentedLabeledOption} from 'antd/es/segmented';
 import {EyeOutlined} from '@ant-design/icons';
+import {Segmented, SegmentedProps} from 'antd';
+import {SegmentedLabeledOption} from 'antd/es/segmented';
+import {useCallback} from 'react';
+
+import Label from '@/app/components/StatusFilter/Label';
+import {Status, StatusFilterLabel} from '@/app/components/StatusFilter/types';
+import useFilterPagination from '@/hooks/pagination/useFilterPagination';
 
 interface StatusFilterProps<T = Status> {
     url: string;

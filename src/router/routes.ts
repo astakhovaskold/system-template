@@ -1,4 +1,5 @@
 import {lazy} from 'react';
+
 import Auth from '@/app/pages/Auth';
 import Welcome from '@/app/pages/Welcome';
 import {RouteItem} from '@/router/types';

@@ -1,8 +1,9 @@
-import React, {memo} from 'react';
-import StatusFilter from '@/app/components/StatusFilter/StatusFilter';
 import {CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, FlagOutlined} from '@ant-design/icons';
-import API from '@/libs/API';
+import {memo} from 'react';
+
+import StatusFilter from '@/app/components/StatusFilter/StatusFilter';
 import {PurchaseOrder} from '@/app/modules/purchase-orders/types';
+import API from '@/libs/API';
 
 interface FilterProps {}
 

@@ -1,9 +1,9 @@
+import {HomeOutlined, ShoppingOutlined, UploadOutlined} from '@ant-design/icons';
 import {memo} from 'react';
 
 import Context from './Context';
 import MenuItem from './MenuItem';
 import MenuSection from './MenuSection';
-import {HomeOutlined, ShoppingOutlined, UploadOutlined} from '@ant-design/icons';
 
 interface MenuProps {
     collapsed?: boolean;

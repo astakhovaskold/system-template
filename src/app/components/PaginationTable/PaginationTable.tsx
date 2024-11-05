@@ -1,17 +1,18 @@
+import {useQuery} from '@tanstack/react-query';
 import {Table, TableProps} from 'antd';
 import {PaginationProps} from 'antd/es';
 import {ColumnsType, ColumnType} from 'antd/es/table';
 import {SortOrder} from 'antd/es/table/interface';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
-import {Common} from '@/typings/common';
+import {PaginationResult, PaginationTableProps} from './types';
+
+import ActionBar from '@/app/components/PaginationTable/ActionBar';
+import {COLUMN_WIDTH} from '@/app/components/PaginationTable/settings';
 import useFilterPagination from '@/hooks/pagination/useFilterPagination';
 import useParamsPagination from '@/hooks/pagination/useParamsPagination';
 
-import {PaginationResult, PaginationTableProps} from './types';
-import {useQuery} from '@tanstack/react-query';
-import {COLUMN_WIDTH} from '@/app/components/PaginationTable/settings';
-import ActionBar from '@/app/components/PaginationTable/ActionBar';
+import {Common} from '@/typings/common';
 
 function isColumnType<T>(column: ColumnsType<T>[0]): column is ColumnType<T> {
     return 'dataIndex' in column;
@@ -37,8 +38,6 @@ function PaginationTable<T extends Common>({
     });
 
     const [selected, setSelected] = useState<Array<T>>([]);
-
-    console.log({selected});
 
     const defaultSortIsSet = useRef(false);
     useEffect(() => {

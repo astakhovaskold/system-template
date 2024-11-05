@@ -2,10 +2,10 @@ import {memo, useEffect, useMemo} from 'react';
 import {Outlet, useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 
 // import useHasAccess from '@/hooks/useHasAccess';
-import {ROLES} from '@/store/account/types';
+import Title from '@/app/components/Utils/Title';
 import {useAuth} from '@/hooks/useAuth';
 import useAccount from '@/store/account/account';
-import Title from '@/app/components/Utils/Title';
+import {ROLES} from '@/store/account/types';
 
 export interface RouteGuardProps {
     title?: string;

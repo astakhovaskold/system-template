@@ -1,7 +1,8 @@
-import {useMemo} from 'react';
 import {TagProps} from 'antd';
-import {PurchaseOrder} from '@/app/modules/purchase-orders/types';
+import {useMemo} from 'react';
+
 import {Status} from '@/app/components/StatusFilter/types';
+import {PurchaseOrder} from '@/app/modules/purchase-orders/types';
 
 const byDefault = '#1677FF';
 

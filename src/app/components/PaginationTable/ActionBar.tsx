@@ -1,8 +1,9 @@
-import React, {memo, PropsWithChildren, useRef} from 'react';
-import {Button} from 'antd';
 import {CloseOutlined} from '@ant-design/icons';
+import {Button} from 'antd';
 import clsx from 'clsx';
+import {memo, PropsWithChildren, useRef} from 'react';
 import {createPortal} from 'react-dom';
+
 import useClickAway from '@/hooks/useClickAway';
 
 interface ActionBarProps {

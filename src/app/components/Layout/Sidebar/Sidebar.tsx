@@ -1,5 +1,5 @@
 import {Layout} from 'antd';
-import {memo, useState} from 'react';
+import {memo} from 'react';
 
 import Logo from '../../Logo';
 import Menu from '../Menu/Menu';

@@ -1,4 +1,5 @@
-import React, {memo} from 'react';
+import {memo} from 'react';
+
 import SearchField from '@/app/components/forms/fields/SearchField';
 import API from '@/libs/API';
 

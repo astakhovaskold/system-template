@@ -1,4 +1,5 @@
-import React, {memo} from 'react';
+import {memo} from 'react';
+
 import Filter from '@/app/modules/purchase-orders/Filter';
 import Pagination from '@/app/modules/purchase-orders/Pagination';
 import Header from '@/app/modules/purchase-orders/views/Header';
