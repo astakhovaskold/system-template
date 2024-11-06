@@ -1,4 +1,5 @@
 import {createServer} from 'miragejs';
+
 import {PurchaseOrder} from '@/app/modules/purchase-orders/types';
 
 createServer({

@@ -1,7 +1,7 @@
 import {memo} from 'react';
 import {Outlet} from 'react-router';
 
-import './styles/main.css';
+import '@/styles/main.css';
 import '@/assets/fonts/fonts.css?url';
 
 import AxiosInterceptorAccess from '@/app/components/Utils/AxiosInterceptorAccess';

@@ -1,15 +1,14 @@
+import {ColumnsType} from 'antd/es/table';
 import {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ColumnsType} from 'antd/es/table';
+import {PurchaseOrder} from './types';
 
-import API from '@/libs/API';
 import PaginationTable from '@/app/components/PaginationTable/PaginationTable';
 import Status from '@/app/modules/purchase-orders/views/Status';
+import API from '@/libs/API';
 
 import '@/app/modules/purchase-orders/mock';
-
-import {PurchaseOrder} from './types';
 
 const columns: ColumnsType<PurchaseOrder.DTO> = [
     {
