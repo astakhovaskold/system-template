@@ -39,6 +39,8 @@ const config: Config = {
                 primary: 'var(--color-primary)',
                 secondary: 'var(--color-secondary)',
 
+                'menu-item-hover': 'var(--color-menu-item-hover)',
+
                 processing: 'var(--color-processing)',
                 success: 'var(--color-success)',
                 warning: 'var(--color-warning)',

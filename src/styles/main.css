@@ -25,6 +25,8 @@
     --color-success: #52C41A;
     --color-error: #FF4D4F;
     --color-closed: rgba(0, 0, 0, 0.25);
+
+    --color-menu-item-hover: #5A61A0;
 }
 
 @layer base {
