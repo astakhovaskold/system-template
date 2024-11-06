@@ -3,3 +3,4 @@
 
 tailwind.config.ts
 postcss.config.js
+vite.config.ts
