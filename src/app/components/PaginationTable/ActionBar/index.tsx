@@ -14,9 +14,14 @@ interface ActionBarProps {
 const ActionBar = memo<PropsWithChildren<ActionBarProps>>(({open = false, onClose, children}): JSX.Element | null => {
     const ref = useRef<HTMLElement | null>(null);
 
-    useClickAway(ref, () => {
-        onClose();
-    }, ['click']);
+    useClickAway(
+        ref,
+        () => {
+            onClose();
+        },
+        ['click'],
+        2000,
+    );
 
     return createPortal(
         <section

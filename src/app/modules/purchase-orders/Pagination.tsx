@@ -5,9 +5,7 @@ import {Link} from 'react-router-dom';
 import PaginationTable from '@/app/components/PaginationTable/PaginationTable';
 import {PurchaseOrderDTO} from '@/app/modules/purchase-orders/types';
 import Status from '@/app/modules/purchase-orders/views/Status';
-import API from '@/libs/API';
-
-import '@/app/modules/purchase-orders/mock';
+import APIMock from '@/libs/APIMock';
 
 const columns: ColumnsType<PurchaseOrderDTO> = [
     {
@@ -47,7 +45,7 @@ const columns: ColumnsType<PurchaseOrderDTO> = [
 ];
 
 const Pagination = memo((): JSX.Element | null => {
-    return <PaginationTable<PurchaseOrderDTO> url={API.purchaseOrders()} columns={columns} />;
+    return <PaginationTable<PurchaseOrderDTO> url={APIMock.purchaseOrders()} columns={columns} />;
 });
 
 export default Pagination;

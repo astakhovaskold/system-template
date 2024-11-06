@@ -8,6 +8,7 @@ import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {PaginationResult, PaginationTableProps} from './types';
 
 import ActionBar from '@/app/components/PaginationTable/ActionBar';
+import ActionButton from '@/app/components/PaginationTable/ActionBar/ActionButton';
 import {COLUMN_WIDTH} from '@/app/components/PaginationTable/settings';
 import useFilterPagination from '@/hooks/pagination/useFilterPagination';
 import useParamsPagination from '@/hooks/pagination/useParamsPagination';
@@ -27,7 +28,7 @@ function PaginationTable<T extends Common>({
     columns: baseColumns,
     uid = url,
     defaultSort,
-    selection = true,
+    actions,
 }: PaginationTableProps<T>) {
     const [params, setParams] = useParamsPagination(uid);
     const [filter] = useFilterPagination(uid);
@@ -37,7 +38,7 @@ function PaginationTable<T extends Common>({
         queryKey: [url, Object.assign(params, filter)],
     });
 
-    const [selected, setSelected] = useState<Array<T>>([]);
+    const [selected, setSelected] = useState<Array<Common['id']>>([]);
 
     const defaultSortIsSet = useRef(false);
     useEffect(() => {
@@ -123,22 +124,26 @@ function PaginationTable<T extends Common>({
         [baseColumns, sortOrder, sortName],
     );
 
-    const selectedRowKeys = useMemo(() => selected.map(({id}) => id), [selected]);
+    const hasSelection = !!actions;
+    const isActionBarOpen = selected && selected.length > 0;
 
     const rowSelection = useMemo<TableProps['rowSelection']>(
         () => ({
             type: 'checkbox',
             columnWidth: COLUMN_WIDTH.XS,
-            onSelect: (_, __, rows) => setSelected(rows),
-            selectedRowKeys: selectedRowKeys,
+            onChange: keys => {
+                // console.log({keys});
+                setSelected(keys as Array<Common['id']>);
+            },
+            selectedRowKeys: selected,
         }),
-        [selectedRowKeys],
+        [selected],
     );
 
     return (
         <>
             <Table<T>
-                rowSelection={selection ? rowSelection : undefined}
+                rowSelection={hasSelection ? rowSelection : undefined}
                 columns={columns}
                 dataSource={list?.content}
                 onChange={onChangePagination}
@@ -149,7 +154,21 @@ function PaginationTable<T extends Common>({
                 scroll={scroll}
             />
 
-            <ActionBar open={selected && selected.length > 0} onClose={() => setSelected([])} />
+            {hasSelection && (
+                <ActionBar open={isActionBarOpen} onClose={() => setSelected([])}>
+                    {actions.map(action => (
+                        <ActionButton
+                            key={action}
+                            listUrl={url}
+                            // TODO: think about
+                            urls={selected.map(id => url + `/${id}`)}
+                            action={action}
+                        >
+                            {action}
+                        </ActionButton>
+                    ))}
+                </ActionBar>
+            )}
         </>
     );
 }

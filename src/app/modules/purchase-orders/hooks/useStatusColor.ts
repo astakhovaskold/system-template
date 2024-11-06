@@ -1,13 +1,11 @@
 import {TagProps} from 'antd';
 import {useMemo} from 'react';
 
-import {Status} from '@/app/components/StatusFilter/types';
 import {PO_STATUS} from '@/app/modules/purchase-orders/types';
-
-const byDefault = '#1677FF';
+import {Status} from '@/typings/common';
 
 function useStatusColor(status: Status): string {
-    const color = useMemo<TagProps['color']>(() => {
+    const color = useMemo<Required<TagProps>['color']>(() => {
         switch (status) {
             case PO_STATUS.CLOSED:
                 return 'default';
@@ -22,11 +20,11 @@ function useStatusColor(status: Status): string {
                 return 'warning';
 
             default:
-                return byDefault;
+                return 'var(--color-processing)';
         }
     }, [status]);
 
-    return color ?? byDefault;
+    return color;
 }
 
 export default useStatusColor;

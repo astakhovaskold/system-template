@@ -4,8 +4,9 @@ import {SegmentedLabeledOption} from 'antd/es/segmented';
 import {useCallback} from 'react';
 
 import Label from '@/app/components/StatusFilter/Label';
-import {Status, StatusFilterLabel} from '@/app/components/StatusFilter/types';
+import {StatusFilterLabel} from '@/app/components/StatusFilter/types';
 import useFilterPagination from '@/hooks/pagination/useFilterPagination';
+import {Status} from '@/typings/common';
 
 interface StatusFilterProps<T = Status> {
     url: string;
@@ -18,8 +19,8 @@ function StatusFilter<T = Status>({url, total, value, options}: StatusFilterProp
     const [filter, setFilter] = useFilterPagination(url);
 
     const onChange: SegmentedProps<T>['onChange'] = useCallback(
-        (value: T) => {
-            setFilter({status: value});
+        (status: T) => {
+            setFilter({status});
         },
         [setFilter],
     );
@@ -34,7 +35,7 @@ function StatusFilter<T = Status>({url, total, value, options}: StatusFilterProp
                 {
                     value: undefined as T,
                     label: (
-                        <Label key="all" amount={total} status={undefined}>
+                        <Label amount={total} status={undefined}>
                             View All
                         </Label>
                     ),
@@ -44,7 +45,7 @@ function StatusFilter<T = Status>({url, total, value, options}: StatusFilterProp
                     ...option,
                     value,
                     label: (
-                        <Label key={title} amount={amount} status={value as Status}>
+                        <Label amount={amount} status={value as Status}>
                             {title}
                         </Label>
                     ),

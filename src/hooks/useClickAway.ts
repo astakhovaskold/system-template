@@ -8,6 +8,7 @@ const useClickAway = <E extends Event = Event>(
     ref: RefObject<HTMLElement | null>,
     onClickAway: (event: E) => void,
     events: Array<string> = defaultEvents,
+    timeout = 0,
 ) => {
     const savedCallback = useRef(onClickAway);
 
@@ -24,14 +25,14 @@ const useClickAway = <E extends Event = Event>(
             el && !el.contains(event.target) && savedCallback.current(event);
         };
         for (const eventName of events) {
-            Utils.on(document, eventName, handler);
+            setTimeout(() => Utils.on(document, eventName, handler), timeout);
         }
         return () => {
             for (const eventName of events) {
-                Utils.off(document, eventName, handler);
+                setTimeout(() => Utils.off(document, eventName, handler), timeout);
             }
         };
-    }, [events, ref]);
+    }, [events, ref, timeout]);
 };
 
 export default useClickAway;

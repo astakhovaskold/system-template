@@ -1,5 +1,3 @@
-import {PO_STATUS} from '@/app/modules/purchase-orders/types';
-
-export type Status = PO_STATUS | undefined;
+import {Status} from '@/typings/common';
 
 export type StatusFilterLabel = {amount: number; status: Status};
