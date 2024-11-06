@@ -2,7 +2,7 @@ import {CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, FlagOutli
 import {memo} from 'react';
 
 import StatusFilter from '@/app/components/StatusFilter/StatusFilter';
-import {PurchaseOrder} from '@/app/modules/purchase-orders/types';
+import {PO_STATUS} from '@/app/modules/purchase-orders/types';
 import API from '@/libs/API';
 
 interface FilterProps {}
@@ -10,31 +10,31 @@ interface FilterProps {}
 const Filter = memo<FilterProps>((): JSX.Element | null => {
     return (
         <div>
-            <StatusFilter<PurchaseOrder.STATUS>
+            <StatusFilter<PO_STATUS>
                 url={API.purchaseOrders()}
                 total={5}
                 options={[
                     {
                         title: 'Pending',
-                        value: PurchaseOrder.STATUS.PENDING,
+                        value: PO_STATUS.PENDING,
                         icon: <ClockCircleOutlined />,
                         amount: 25,
                     },
                     {
                         title: 'Approved',
-                        value: PurchaseOrder.STATUS.APPROVED,
+                        value: PO_STATUS.APPROVED,
                         icon: <CheckCircleOutlined />,
                         amount: 21,
                     },
                     {
                         title: 'Rejected',
-                        value: PurchaseOrder.STATUS.REJECTED,
+                        value: PO_STATUS.REJECTED,
                         icon: <CloseCircleOutlined />,
                         amount: 21,
                     },
                     {
                         title: 'Closed',
-                        value: PurchaseOrder.STATUS.CLOSED,
+                        value: PO_STATUS.CLOSED,
                         icon: <FlagOutlined />,
                         amount: 21,
                     },

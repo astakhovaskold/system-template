@@ -2,23 +2,23 @@ import {TagProps} from 'antd';
 import {useMemo} from 'react';
 
 import {Status} from '@/app/components/StatusFilter/types';
-import {PurchaseOrder} from '@/app/modules/purchase-orders/types';
+import {PO_STATUS} from '@/app/modules/purchase-orders/types';
 
 const byDefault = '#1677FF';
 
 function useStatusColor(status: Status): string {
     const color = useMemo<TagProps['color']>(() => {
         switch (status) {
-            case PurchaseOrder.STATUS.CLOSED:
+            case PO_STATUS.CLOSED:
                 return 'default';
 
-            case PurchaseOrder.STATUS.APPROVED:
+            case PO_STATUS.APPROVED:
                 return 'success';
 
-            case PurchaseOrder.STATUS.REJECTED:
+            case PO_STATUS.REJECTED:
                 return 'error';
 
-            case PurchaseOrder.STATUS.PENDING:
+            case PO_STATUS.PENDING:
                 return 'warning';
 
             default:

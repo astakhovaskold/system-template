@@ -28,6 +28,7 @@ function StatusFilter<T = Status>({url, total, value, options}: StatusFilterProp
         <Segmented<T>
             value={(value ?? filter?.status ?? undefined) as T}
             onChange={onChange}
+            className="text-black"
             size="large"
             options={[
                 {

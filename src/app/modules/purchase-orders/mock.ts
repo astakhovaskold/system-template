@@ -1,6 +1,6 @@
 import {createServer} from 'miragejs';
 
-import {PurchaseOrder} from '@/app/modules/purchase-orders/types';
+import {PO_STATUS} from '@/app/modules/purchase-orders/types';
 
 createServer({
     routes() {
@@ -15,7 +15,7 @@ createServer({
                     supplier: 9812392,
                     supplierName: 'Rose Inc.',
                     supplierCountry: 'China',
-                    status: PurchaseOrder.STATUS.APPROVED,
+                    status: PO_STATUS.APPROVED,
                     statusName: 'Approved',
                     orderItems: 1244,
                 },
@@ -28,7 +28,7 @@ createServer({
                     supplier: 9812392,
                     supplierName: 'Rose Inc.',
                     supplierCountry: 'China',
-                    status: PurchaseOrder.STATUS.APPROVED,
+                    status: PO_STATUS.APPROVED,
                     statusName: 'Approved',
                     orderItems: 1244,
                 },
@@ -41,7 +41,7 @@ createServer({
                     supplier: 9812392,
                     supplierName: 'Rose Inc.',
                     supplierCountry: 'China',
-                    status: PurchaseOrder.STATUS.REJECTED,
+                    status: PO_STATUS.REJECTED,
                     statusName: 'Rejected',
                     orderItems: 1244,
                 },
@@ -54,7 +54,7 @@ createServer({
                     supplier: 9812392,
                     supplierName: 'Rose Inc.',
                     supplierCountry: 'China',
-                    status: PurchaseOrder.STATUS.PENDING,
+                    status: PO_STATUS.PENDING,
                     statusName: 'Pending',
                     orderItems: 1244,
                 },
@@ -67,7 +67,7 @@ createServer({
                     supplier: 9812392,
                     supplierName: 'Rose Inc.',
                     supplierCountry: 'China',
-                    status: PurchaseOrder.STATUS.APPROVED,
+                    status: PO_STATUS.APPROVED,
                     statusName: 'Approved',
                     orderItems: 1244,
                 },
@@ -80,7 +80,7 @@ createServer({
                     supplier: 9812392,
                     supplierName: 'Rose Inc.',
                     supplierCountry: 'China',
-                    status: PurchaseOrder.STATUS.CLOSED,
+                    status: PO_STATUS.CLOSED,
                     statusName: 'Closed',
                     orderItems: 1244,
                 },
@@ -93,7 +93,7 @@ createServer({
                     supplier: 9812392,
                     supplierName: 'Rose Inc.',
                     supplierCountry: 'China',
-                    status: PurchaseOrder.STATUS.PENDING,
+                    status: PO_STATUS.PENDING,
                     statusName: 'Pending',
                     orderItems: 1244,
                 },
@@ -106,7 +106,7 @@ createServer({
                     supplier: 9812392,
                     supplierName: 'Rose Inc.',
                     supplierCountry: 'China',
-                    status: PurchaseOrder.STATUS.PENDING,
+                    status: PO_STATUS.PENDING,
                     statusName: 'Pending',
                     orderItems: 1244,
                 },

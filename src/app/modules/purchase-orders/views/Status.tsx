@@ -1,18 +1,38 @@
-import {Tag} from 'antd';
-import {CSSProperties, memo} from 'react';
+import {Tag, TagProps} from 'antd';
+import clsx from 'clsx';
+import {memo, useMemo} from 'react';
 
-import useStatusColor from '@/app/modules/purchase-orders/hooks/useStatusColor';
-import {PurchaseOrder} from '@/app/modules/purchase-orders/types';
+import {PO_STATUS, PurchaseOrderDTO} from '@/app/modules/purchase-orders/types';
 
-type Props = Pick<PurchaseOrder.DTO, 'status' | 'statusName'>;
-
-const textStyle: CSSProperties = {whiteSpace: 'nowrap'};
+type Props = Pick<PurchaseOrderDTO, 'status' | 'statusName'>;
 
 const Status = memo<Props>(({status, statusName}): JSX.Element | null => {
-    const color = useStatusColor(status);
+    const color = useMemo<TagProps['color']>(() => {
+        switch (status) {
+            case PO_STATUS.CLOSED:
+                return 'var(--color-closed)';
+
+            case PO_STATUS.APPROVED:
+                return 'success';
+
+            case PO_STATUS.REJECTED:
+                return 'error';
+
+            case PO_STATUS.PENDING:
+                return 'warning';
+
+            default:
+                return 'default';
+        }
+    }, [status]);
 
     return (
-        <Tag style={textStyle} color={color}>
+        <Tag
+            className={clsx('whitespace-nowrap', {
+                'border-1 !border-closed': status === PO_STATUS.CLOSED,
+            })}
+            color={color}
+        >
             {statusName}
         </Tag>
     );
