@@ -56,4 +56,12 @@ export default class Utils {
     static isBrowser = typeof window !== 'undefined';
 
     static isNavigator = typeof navigator !== 'undefined';
+
+    static getFileExtension(filename: string) {
+        const parts = filename.split('.');
+        if (parts.length > 1) {
+            return '.' + parts.pop()?.toLowerCase();
+        }
+        return '';
+    }
 }

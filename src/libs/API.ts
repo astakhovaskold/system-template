@@ -49,4 +49,10 @@ export default class API {
         const prefix = '/purchase-orders';
         return `${this.api}${prefix}${this.joinChunks(...chunks)}`;
     }
+
+    static uploads(): string;
+    static uploads(...chunks: chunks): string {
+        const prefix = '/uploads';
+        return `${this.api}${prefix}${this.joinChunks(...chunks)}`;
+    }
 }

@@ -1,6 +1,7 @@
 import MirageJs from 'miragejs';
 
 import {PaginationResult} from '@/app/components/PaginationTable/types';
+import {UploadStatus, UploadTypes, UploadDTO} from '@/app/modules/mass-upload/types';
 import {PO_STATUS, PurchaseOrderDTO} from '@/app/modules/purchase-orders/types';
 import {AccountDTO, ROLES, UserDTO} from '@/store/account/types';
 
@@ -145,3 +146,14 @@ export const mockPOList = (request: MirageJs.Request): PaginationResult<Purchase
     totalElements: 10,
     totalPages: request.queryParams.size ? Math.ceil(10 / +request.queryParams.size) : 1,
 });
+
+export const uploadedFileResponse: UploadDTO = {
+    vendorOrderNo: '1421412',
+    fileName: 'Table.csv',
+    orderNo: 6,
+    createdBy: 'Daniil Babichev',
+    uploadType: UploadTypes.PO_UPLOAD,
+    errors: [],
+    uploadRefNo: 5214,
+    status: UploadStatus.PENDING,
+};
