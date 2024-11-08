@@ -5,15 +5,22 @@ import Welcome from '@/app/pages/Welcome';
 import {RouteItem} from '@/router/types';
 
 const Unauthorized = lazy(() => import('@/app/pages/error/Unauthorized'));
-const PurchaseOrders = lazy(() => import('@/app/pages/PurchaseOrders'));
+const PurchaseOrdersList = lazy(() => import('@/app/modules/purchase-orders/List'));
+const PurchaseOrdersPage = lazy(() => import('@/app/modules/purchase-orders/Page'));
+
 const MassUpload = lazy(() => import('@/app/pages/MassUpload'));
 
 const modules: Array<RouteItem> = [
     {
         path: 'purchase-orders',
         title: 'Purchase Orders',
-        component: PurchaseOrders,
+        component: PurchaseOrdersList,
         toNav: true,
+    },
+    {
+        path: 'purchase-orders/:id',
+        title: 'Purchase Order',
+        component: PurchaseOrdersPage,
     },
     {
         path: 'mass-upload',

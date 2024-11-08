@@ -2,9 +2,9 @@ import {Tag, TagProps} from 'antd';
 import clsx from 'clsx';
 import {memo, useMemo} from 'react';
 
-import {PO_STATUS, PurchaseOrderDTO} from '@/app/modules/purchase-orders/types';
+import {PO_STATUS, PurchaseOrderListDTO} from '@/app/modules/purchase-orders/types';
 
-type Props = Pick<PurchaseOrderDTO, 'status' | 'statusName'>;
+type Props = Pick<PurchaseOrderListDTO, 'status' | 'statusName'>;
 
 const Status = memo<Props>(({status, statusName}): JSX.Element | null => {
     const color = useMemo<TagProps['color']>(() => {
@@ -28,7 +28,7 @@ const Status = memo<Props>(({status, statusName}): JSX.Element | null => {
 
     return (
         <Tag
-            className={clsx('whitespace-nowrap', {
+            className={clsx('whitespace-nowrap capitalize', {
                 'border-1 !border-closed': status === PO_STATUS.CLOSED,
             })}
             color={color}

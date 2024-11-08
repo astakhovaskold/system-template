@@ -1,4 +1,4 @@
-import {PurchaseOrderDTO} from '@/app/modules/purchase-orders/types';
+import {PurchaseOrderListDTO} from '@/app/modules/purchase-orders/types';
 import {UserDTO} from '@/store/account/types';
 
 export type chunks = Array<unknown>;
@@ -44,7 +44,7 @@ export default class API {
     }
 
     static purchaseOrders(): string;
-    static purchaseOrders(id: PurchaseOrderDTO['id'], command?: 'profile'): string;
+    static purchaseOrders(id: PurchaseOrderListDTO['id'], command?: 'profile'): string;
     static purchaseOrders(...chunks: chunks): string {
         const prefix = '/purchase-orders';
         return `${this.api}${prefix}${this.joinChunks(...chunks)}`;

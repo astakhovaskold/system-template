@@ -53,6 +53,16 @@ export default class Utils {
         }
     }
 
+    static currencyFormat = (number: number, currency: string, fraction = false, locale = 'gb') =>
+        number.toLocaleString(locale, {
+            style: 'currency',
+            currency,
+            currencyDisplay: 'code',
+            localeMatcher: 'best fit',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: fraction ? 2 : 0,
+        });
+
     static isBrowser = typeof window !== 'undefined';
 
     static isNavigator = typeof navigator !== 'undefined';

@@ -2,7 +2,14 @@ import MirageJs from 'miragejs';
 
 import {PaginationResult} from '@/app/components/PaginationTable/types';
 import {UploadStatus, UploadTypes, UploadDTO} from '@/app/modules/mass-upload/types';
-import {PO_STATUS, PurchaseOrderDTO} from '@/app/modules/purchase-orders/types';
+import {
+    PO_STATUS,
+    PO_TYPE,
+    PurchaseOrderDTO,
+    PurchaseOrderItemDTO,
+    PurchaseOrderListDTO,
+} from '@/app/modules/purchase-orders/types';
+import {NO_DATA} from '@/libs/text';
 import {AccountDTO, ROLES, UserDTO} from '@/store/account/types';
 
 export const mockAccount: AccountDTO = {
@@ -36,7 +43,7 @@ export const mockUsers: Array<UserDTO> = [
     {id: 10, email: 'james.nelson@example.com', first_name: 'James', last_name: 'Nelson', role: ROLES.OBSERVER},
 ];
 
-export const mockPOList = (request: MirageJs.Request): PaginationResult<PurchaseOrderDTO> => ({
+export const mockPOList = (request: MirageJs.Request): PaginationResult<PurchaseOrderListDTO> => ({
     content: [
         {
             id: 1234333,
@@ -146,6 +153,78 @@ export const mockPOList = (request: MirageJs.Request): PaginationResult<Purchase
     totalElements: 10,
     totalPages: request.queryParams.size ? Math.ceil(10 / +request.queryParams.size) : 1,
 });
+
+const mockPOItem: PurchaseOrderItemDTO = {
+    id: 7165256,
+    unitCostUOP: 50.75,
+    itemType: 'Product',
+    color: 'Blue',
+    unitOfPurchase: 100,
+    totalELCUOP: 5000.5,
+    locationType: 'Warehouse',
+    costSource: 'SupplierA',
+    localCurrency: 'USD',
+    unitELCUOP: 45.0,
+    itemParent: 'ITEM_PARENT_ID', // или объект ItemDTO при необходимости
+    currency: 'USD',
+    itemDescription: 'High-quality steel screws',
+    latestShipmentDate: '2024-12-23T00:00:00.000Z',
+    estimatedInStockDate: '2024-01-23T00:00:00.000Z',
+    itemGrandParent: 'ITEM_GRANDPARENT_ID',
+    nonScaling: 'No',
+    cancelledQtyUOP: 0,
+    supplierUnitCost: 52.5,
+    item: 'ITEM_001',
+    locationName:
+        'Shanghai Special Administrative Region "Penghai," Industrial Harbor Nantan, Plot No. 732, Huangpu River Coastal Strip, Berth 19, Longjiang Port Complex',
+    quantity: 500,
+    countryOfSourcing: 'China',
+    size: 'Medium',
+    variance: 0.5,
+    vpn: 'vpn1',
+    earliestShipmentDate: '2024-11-25T00:00:00.000Z',
+    detailedColorDescription: 'Bright blue with a matte finish',
+};
+
+export const mockPOView: PurchaseOrderDTO = {
+    id: 1234333,
+    orderType: NO_DATA,
+    importer: 1, // или объект ImporterDTO
+    includeOnOrder: 'No',
+    importOrder: 'Yes',
+    estimatedRDCInStock: '2024-11-25T00:00:00.000Z',
+    discount: 3,
+    primaryCurrency: 'AED',
+    totalOrderCost: null, // пока пусто, можно задать значения позже
+    canceledCost: null, // пока пусто
+    exchangeRate: 0.27,
+    contact: '647584736',
+    ediPO: 'No',
+    poStatus: PO_STATUS.APPROVED,
+    qcRequired: 'Yes',
+    latestShipmentDate: '2024-12-15T00:00:00.000Z',
+    supplierCode: 1425367, // или объект SupplierDTO
+    supplierName: 'Rose Inc.',
+    supplierSiteId: 1425367,
+    otbEndOfWeekDate: '2024-12-27T00:00:00.000Z',
+    orderNo: 123456,
+    landedCost: 2000,
+    orderCurrency: 'AED, USD',
+    notAfterDate: '2024-12-31T00:00:00.000Z',
+    notBeforeDate: '2024-11-01T00:00:00.000Z',
+    importCountry: 'China',
+    outstandingCost: 1500,
+    locationPickUp: 'WH1',
+    earliestShipDate: '2024-11-25T00:00:00.000Z',
+    vendorOrdNo: 'BZ-123233',
+    paymentTermsName: 'Net 30 Days',
+    orderApprovalDate: '2024-11-24T00:00:00.000Z',
+    location:
+        'Shanghai Special Administrative Region "Penghai," Industrial Harbor Nantan, Plot No. 732, Huangpu River Coastal Strip, Berth 19, Longjiang Port Complex',
+    poType: PO_TYPE.IMPORT,
+    items: [mockPOItem],
+    expenses: 50.0,
+};
 
 export const uploadedFileResponse: UploadDTO = {
     vendorOrderNo: '1421412',

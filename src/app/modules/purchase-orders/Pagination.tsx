@@ -3,11 +3,11 @@ import {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import PaginationTable from '@/app/components/PaginationTable/PaginationTable';
-import {PurchaseOrderDTO} from '@/app/modules/purchase-orders/types';
+import {PurchaseOrderListDTO} from '@/app/modules/purchase-orders/types';
 import Status from '@/app/modules/purchase-orders/views/Status';
 import APIMock from '@/libs/APIMock';
 
-const columns: ColumnsType<PurchaseOrderDTO> = [
+const columns: ColumnsType<PurchaseOrderListDTO> = [
     {
         dataIndex: 'id',
         title: 'PO #',
@@ -45,7 +45,7 @@ const columns: ColumnsType<PurchaseOrderDTO> = [
 ];
 
 const Pagination = memo((): JSX.Element | null => {
-    return <PaginationTable<PurchaseOrderDTO> url={APIMock.purchaseOrders()} columns={columns} />;
+    return <PaginationTable<PurchaseOrderListDTO> url={APIMock.purchaseOrders()} columns={columns} />;
 });
 
 export default Pagination;

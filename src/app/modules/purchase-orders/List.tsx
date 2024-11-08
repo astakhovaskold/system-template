@@ -1,18 +1,17 @@
 import {memo} from 'react';
 
+import PageContainer from '@/app/components/Layout/PageContainer';
 import Filter from '@/app/modules/purchase-orders/Filter';
 import Pagination from '@/app/modules/purchase-orders/Pagination';
 import Header from '@/app/modules/purchase-orders/views/Header';
 
-interface ListProps {}
-
-const List = memo<ListProps>((): JSX.Element | null => {
+const List = memo((): JSX.Element | null => {
     return (
-        <div className="flex flex-col gap-y-4">
+        <PageContainer className="flex flex-col gap-y-4" title="Purchase Orders">
             <Filter />
             <Header />
             <Pagination />
-        </div>
+        </PageContainer>
     );
 });
 
