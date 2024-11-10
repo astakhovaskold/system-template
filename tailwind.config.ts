@@ -33,6 +33,7 @@ const config: Config = {
             blue: {
                 DEFAULT: 'var(--color-blue)',
             },
+            light: 'var(--color-light)',
         },
         extend: {
             colors: {

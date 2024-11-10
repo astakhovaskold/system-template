@@ -24,6 +24,11 @@ const themeConfig: ThemeConfig = {
         Button: {
             primaryShadow: 'none',
         },
+        Dropdown: {
+            colorInfoTextActive: '#000000',
+            controlItemBgActive: '#E6F4FF',
+            controlItemBgActiveHover: '#E6F4FF',
+        },
     },
 };
 

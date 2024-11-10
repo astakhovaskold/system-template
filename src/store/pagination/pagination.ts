@@ -1,16 +1,20 @@
 import {createJSONStorage, persist} from 'zustand/middleware';
 import {create} from 'zustand/react';
 
-import {PaginationAction, paginationState} from '@/store/pagination/types';
+import {PaginationAction, PaginationConfig, paginationState} from '@/store/pagination/types';
 
 const usePagination = create(
     persist<paginationState & PaginationAction>(
         (set, get) => ({
             params: {},
             filter: {},
+            columns: {},
             defaultParams: {
                 page: 0,
                 size: 10,
+            },
+            defaultConfig: {
+                columns: {},
             },
             setParams: (url, params) => {
                 const state = get();
@@ -40,6 +44,31 @@ const usePagination = create(
                             ...state.defaultParams,
                             ...prevFilter,
                             ...params,
+                        },
+                    },
+                });
+            },
+            setColumns: (url, selected) => {
+                const state = get();
+
+                set({
+                    ...state,
+                    columns: {
+                        ...state.columns,
+                        [url]: selected,
+                    },
+                });
+            },
+            setConfig: (url, config, selected) => {
+                const state = get();
+
+                set({
+                    ...state,
+                    defaultConfig: {
+                        ...state.defaultConfig,
+                        [config]: {
+                            ...(state.defaultConfig[config] as PaginationConfig),
+                            [url]: selected,
                         },
                     },
                 });

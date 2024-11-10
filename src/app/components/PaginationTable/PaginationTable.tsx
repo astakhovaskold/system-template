@@ -10,6 +10,8 @@ import {PaginationResult, PaginationTableProps} from './types';
 import ActionBar from '@/app/components/PaginationTable/ActionBar';
 import ActionButton from '@/app/components/PaginationTable/ActionBar/ActionButton';
 import {COLUMN_WIDTH} from '@/app/components/PaginationTable/settings';
+import useColumnsPagination from '@/hooks/pagination/useColumnsPagination';
+import useConfigPagination from '@/hooks/pagination/useConfigPagination';
 import useFilterPagination from '@/hooks/pagination/useFilterPagination';
 import useParamsPagination from '@/hooks/pagination/useParamsPagination';
 
@@ -33,6 +35,9 @@ function PaginationTable<T extends Common>({
     const [params, setParams] = useParamsPagination(uid);
     const [filter] = useFilterPagination(uid);
     const {page, size, ordering} = params;
+
+    const [columnsPagination, setColumnsPagination] = useColumnsPagination(url);
+    const [, setConfig] = useConfigPagination(url, 'columns');
 
     const {data: list, isLoading: loading} = useQuery<PaginationResult<T>>({
         queryKey: [url, Object.assign(params, filter)],
@@ -98,11 +103,17 @@ function PaginationTable<T extends Common>({
     const columns = useMemo(
         () =>
             baseColumns.map(column => {
-                const {key} = column;
+                const {key, hidden: hiddenByDefault} = column;
+
+                const hidden = !(Array.isArray(columnsPagination) && columnsPagination.length > 0
+                    ? columnsPagination.includes(key as string)
+                    : !hiddenByDefault);
+
                 if (sortName && column.sorter) {
                     if (key === sortName) {
                         return {
                             ...column,
+                            hidden,
                             sortOrder,
                         };
                     } else if (isColumnType<T>(column)) {
@@ -110,6 +121,7 @@ function PaginationTable<T extends Common>({
                         if (dataIndex === sortName || (Array.isArray(dataIndex) && dataIndex.join('.') === sortName)) {
                             return {
                                 ...column,
+                                hidden,
                                 sortOrder,
                             };
                         }
@@ -118,11 +130,21 @@ function PaginationTable<T extends Common>({
 
                 return {
                     ...column,
+                    hidden,
                     sortOrder: null,
                 };
             }),
-        [baseColumns, sortOrder, sortName],
+        [baseColumns, sortName, columnsPagination, sortOrder],
     );
+
+    useEffect(() => {
+        if (!columnsPagination || (Array.isArray(columnsPagination) && columnsPagination.length === 0)) {
+            const columnsByConfig = baseColumns.filter(({hidden}) => !hidden).map(({key}) => key as string);
+
+            setColumnsPagination(columnsByConfig);
+            setConfig(columnsByConfig);
+        }
+    }, [baseColumns, columns, columnsPagination, setColumnsPagination, setConfig]);
 
     const hasSelection = !!actions;
     const isActionBarOpen = selected && selected.length > 0;
@@ -132,7 +154,6 @@ function PaginationTable<T extends Common>({
             type: 'checkbox',
             columnWidth: COLUMN_WIDTH.XS,
             onChange: keys => {
-                // console.log({keys});
                 setSelected(keys as Array<Common['id']>);
             },
             selectedRowKeys: selected,
@@ -143,13 +164,13 @@ function PaginationTable<T extends Common>({
     return (
         <>
             <Table<T>
+                rowKey="id"
                 rowSelection={hasSelection ? rowSelection : undefined}
                 columns={columns}
                 dataSource={list?.content}
                 onChange={onChangePagination}
                 pagination={paginationConfig}
                 showSorterTooltip={false}
-                rowKey="id"
                 loading={loading}
                 scroll={scroll}
             />
