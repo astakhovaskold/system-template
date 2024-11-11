@@ -125,7 +125,7 @@ function EditTableButton<T>({url, items: itemsBase}: EditTableButtonProps<T>): J
                 },
             ],
         }),
-        [items, onOk, selected],
+        [config, items, onOk, selected],
     );
 
     return (
