@@ -28,6 +28,11 @@ export default class API {
         return suffix.length ? `/${suffix}` : '';
     }
 
+    // services
+    protected static get poService(): string {
+        return '/po-service';
+    }
+
     // app
     static auth(): string;
     static auth(chunk: 'login' | 'logout' | 'refresh-token' | 'profile'): string;
@@ -44,10 +49,10 @@ export default class API {
     }
 
     static purchaseOrders(): string;
-    static purchaseOrders(id: PurchaseOrderListDTO['id'], command?: 'profile'): string;
+    static purchaseOrders(id: PurchaseOrderListDTO['id']): string;
     static purchaseOrders(...chunks: chunks): string {
         const prefix = '/purchase-orders';
-        return `${this.api}${prefix}${this.joinChunks(...chunks)}`;
+        return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;
     }
 
     static uploads(): string;
