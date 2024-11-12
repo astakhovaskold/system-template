@@ -13,6 +13,7 @@ export interface PurchaseOrderItemDTO extends Common {
     totalELCUOP?: number | null;
     locationType: string; // enum ?
     locationName: string;
+    location: number;
     costSource: string; // reference ?
     localCurrency: string; // enum ?
     unitELCUOP?: number | null;
@@ -29,6 +30,7 @@ export interface PurchaseOrderItemDTO extends Common {
     quantity: number;
     countryOfSourcing: string; // CountryDTO ?
     size: string; // enum ?
+    style: string; // enum ?
     variance: number;
     vpn: string; // enum ?
     earliestShipmentDate: CommonDate;

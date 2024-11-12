@@ -395,6 +395,8 @@ const mockPOItem: PurchaseOrderItemDTO = {
     quantity: 500,
     countryOfSourcing: 'China',
     size: 'Medium',
+    style: 'Casual',
+    location: 21421321,
     variance: 0.5,
     vpn: 'vpn1',
     earliestShipmentDate: '2024-11-25T00:00:00.000Z',
