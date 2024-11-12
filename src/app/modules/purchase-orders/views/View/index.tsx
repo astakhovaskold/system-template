@@ -29,7 +29,7 @@ const View = memo((): JSX.Element | null => {
         <>
             <div className="flex items-center gap-x-3">
                 <Supplier supplierName={supplierName} supplierCountry={importCountry} />
-                <Status status={poStatus} statusName={poStatus} />
+                <Status status={poStatus} />
             </div>
 
             <Tabs

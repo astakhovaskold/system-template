@@ -4,9 +4,9 @@ import {memo, useMemo} from 'react';
 
 import {PO_STATUS, PurchaseOrderListDTO} from '@/app/modules/purchase-orders/types';
 
-type Props = Pick<PurchaseOrderListDTO, 'status' | 'statusName'>;
+type Props = Pick<PurchaseOrderListDTO, 'status'>;
 
-const Status = memo<Props>(({status, statusName}): JSX.Element | null => {
+const Status = memo<Props>(({status}): JSX.Element | null => {
     const color = useMemo<TagProps['color']>(() => {
         switch (status) {
             case PO_STATUS.CLOSED:
@@ -33,7 +33,7 @@ const Status = memo<Props>(({status, statusName}): JSX.Element | null => {
             })}
             color={color}
         >
-            {statusName}
+            {status.toString().toLowerCase()}
         </Tag>
     );
 });

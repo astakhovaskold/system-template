@@ -1,4 +1,3 @@
-import {UserDTO} from '@/store/account/types';
 import {Common, CommonDate} from '@/typings/common';
 
 export interface SupplierDTO extends Common {
@@ -75,16 +74,43 @@ export interface PurchaseOrderDTO extends Common {
 }
 
 export interface PurchaseOrderListDTO extends Common {
+    orderType: string;
+    totalOrderRetailExcVAT: number;
+    discount: number;
+    totalVAT: number;
+    routingLocation: string;
+    canceledCost: number;
+    payMethod: string;
+    department: number;
+    otbEndOfWeekDate: string;
+    orderNo: number;
+    landedCost: number;
+    orderCurrency: string;
+    notAfterDate: string;
+    importBillToLocType: string;
+    notBeforeDate: string;
+    backhaulAllowance: number;
+    importCountry: string;
+    outstandingCost: number;
+    markupPercentRetail: number;
+    backhaulType: string;
+    vendorOrdNo: string;
+    countryOfSourcing: string;
+    totalOrderRetailIncVAT: number;
+    orderApprovalDate: string;
+    pickupDate: string;
+    duty: number;
+    poType: string;
+    importBillToLoc: number;
+    orderExchangeRate: number;
+    promotion: number;
+    expenses: number;
     totalOrderCost: number;
-    raisedBy: UserDTO['id'];
-    raisedByName: string;
-    createdAt: Date | string;
-    supplierId: SupplierDTO['id'];
+    raisedBy: string;
     supplierName: SupplierDTO['title'];
-    supplierCountry: SupplierDTO['country'];
+    supplierCode: number;
+    supplierSiteId: number;
     status: PO_STATUS;
-    statusName: string;
-    orderItems: number;
 }
 
 export enum PO_STATUS {
