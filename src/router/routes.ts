@@ -8,7 +8,8 @@ const Unauthorized = lazy(() => import('@/app/pages/error/Unauthorized'));
 const PurchaseOrdersList = lazy(() => import('@/app/modules/purchase-orders/List'));
 const PurchaseOrdersPage = lazy(() => import('@/app/modules/purchase-orders/Page'));
 
-const MassUpload = lazy(() => import('@/app/pages/MassUpload'));
+const MassUploadList = lazy(() => import('@/app/modules/mass-upload/List'));
+const MassUploadPage = lazy(() => import('@/app/modules/mass-upload/Page'));
 
 const modules: Array<RouteItem> = [
     {
@@ -25,8 +26,13 @@ const modules: Array<RouteItem> = [
     {
         path: 'mass-upload',
         title: 'Mass Upload',
-        component: MassUpload,
+        component: MassUploadList,
         toNav: true,
+    },
+    {
+        path: 'mass-upload/:id',
+        title: 'Mass Upload',
+        component: MassUploadPage,
     },
 ];
 

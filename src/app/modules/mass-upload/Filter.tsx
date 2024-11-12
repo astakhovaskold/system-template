@@ -3,13 +3,13 @@ import {memo} from 'react';
 
 import StatusFilter from '@/app/components/StatusFilter/StatusFilter';
 import {MASS_UPLOAD_STATUS} from '@/app/modules/mass-upload/types';
-import API from '@/libs/API';
+import APIMock from '@/libs/APIMock';
 
 const Filter = memo((): JSX.Element | null => {
     return (
         <div>
             <StatusFilter<MASS_UPLOAD_STATUS>
-                url={API.massUploads()}
+                url={APIMock.massUploads()}
                 total={5}
                 options={[
                     {

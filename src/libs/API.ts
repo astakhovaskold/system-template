@@ -1,3 +1,4 @@
+import {UploadDTO} from '@/app/modules/mass-upload/types';
 import {PurchaseOrderListDTO} from '@/app/modules/purchase-orders/types';
 import {UserDTO} from '@/store/account/types';
 
@@ -56,14 +57,15 @@ export default class API {
     }
 
     static massUploads(): string;
+    static massUploads(id: UploadDTO['uploadRefNo']): string;
     static massUploads(...chunks: chunks): string {
         const prefix = '/uploads';
-        return `${this.api}${prefix}${this.joinChunks(...chunks)}`;
+        return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;
     }
 
     static uploads(): string;
     static uploads(...chunks: chunks): string {
         const prefix = '/uploads';
-        return `${this.api}${prefix}${this.joinChunks(...chunks)}`;
+        return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;
     }
 }

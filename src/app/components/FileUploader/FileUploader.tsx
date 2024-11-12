@@ -29,18 +29,22 @@ function FileUploader<ResponseType>({accept, url, maxFileSize, setFileList}: Fil
         async options => {
             const {onError, file, onProgress, onSuccess} = options;
 
+            const formData = new FormData();
+            formData.append('file', file);
+
             controller.current = new AbortController();
 
             const config: AxiosRequestConfig = {
                 signal: controller.current.signal,
+                headers: {'Content-Type': 'multipart/form-data'},
                 onUploadProgress: event => {
                     onProgress?.({percent: (event.loaded / event.total!) * 100}, file);
                 },
             };
 
             try {
-                const res = await axios.post<typeof file, ResponseType>(url, file, config);
-                onSuccess?.(res);
+                const response = await axios.post<typeof file, ResponseType>(url, formData, config);
+                onSuccess?.(response);
             } catch (error) {
                 onError?.(error as unknown as AxiosError);
                 setError?.((error as unknown as AxiosError)?.response?.data as string);

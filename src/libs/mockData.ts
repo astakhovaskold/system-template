@@ -1,7 +1,7 @@
 import MirageJs from 'miragejs';
 
 import {PaginationResult} from '@/app/components/PaginationTable/types';
-import {MASS_UPLOAD_STATUS, UploadTypes, UploadDTO} from '@/app/modules/mass-upload/types';
+import {MASS_UPLOAD_STATUS, UploadDTO, UploadTypes} from '@/app/modules/mass-upload/types';
 import {
     PO_STATUS,
     PO_TYPE,
@@ -254,7 +254,7 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-01T09:00:00',
             errors: [],
-            uploadRefNo: 123405,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.PENDING,
         },
         {
@@ -266,7 +266,7 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-02T10:30:00',
             errors: [],
-            uploadRefNo: 123406,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.ERROR,
         },
         {
@@ -278,7 +278,7 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-03T11:45:00',
             errors: [],
-            uploadRefNo: 123407,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.VALIDATED,
         },
         {
@@ -290,7 +290,7 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-04T12:15:00',
             errors: [],
-            uploadRefNo: 123408,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.REJECTED,
         },
         {
@@ -302,7 +302,7 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-05T13:50:00',
             errors: [],
-            uploadRefNo: 123409,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.VALIDATED,
         },
         {
@@ -314,7 +314,7 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-06T14:20:00',
             errors: [],
-            uploadRefNo: 123410,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.VALIDATED,
         },
         {
@@ -326,7 +326,7 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-07T15:00:00',
             errors: [],
-            uploadRefNo: 123411,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.REJECTED,
         },
         {
@@ -338,7 +338,7 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-08T16:30:00',
             errors: [],
-            uploadRefNo: 123412,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.ERROR,
         },
         {
@@ -350,10 +350,36 @@ export const mockMUList = (request: MirageJs.Request): PaginationResult<UploadDT
             uploadType: UPLOAD_TYPE_NAME[UploadTypes.PO_UPLOAD],
             uploaded: '2024-11-09T17:45:00',
             errors: [],
-            uploadRefNo: 123413,
+            uploadRefNo: 1234333,
             status: MASS_UPLOAD_STATUS.VALIDATED,
         },
     ],
     totalElements: 10,
     totalPages: request.queryParams.size ? Math.ceil(10 / +request.queryParams.size) : 1,
 });
+
+export const mockMUView: UploadDTO = {
+    id: 1234333,
+    uploadRefNo: 1234333,
+    fileName: 'test.csv',
+    orderNo: 12345678,
+    vendorOrderNo: 'VENDOR123',
+    uploadType: 'TYPE_A',
+    createdBy: 'uploader1',
+    uploaded: '2023-10-01T00:00:00Z',
+    status: MASS_UPLOAD_STATUS.PENDING,
+    errors: [
+        {
+            lineNumber: 1,
+            columnName: 'COLUMN1',
+            columnValue: 'VALUE1',
+            errorMessage: 'Ошибка в значении',
+        },
+        {
+            lineNumber: 2,
+            columnName: 'COLUMN2',
+            columnValue: 'VALUE2',
+            errorMessage: 'Ошибка в значении',
+        },
+    ],
+};
