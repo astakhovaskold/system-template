@@ -1,5 +1,6 @@
 import {Dayjs} from 'dayjs';
 
+import {MASS_UPLOAD_STATUS} from '@/app/modules/mass-upload/types';
 import {PO_STATUS} from '@/app/modules/purchase-orders/types';
 
 export interface Common {
@@ -13,6 +14,6 @@ export interface PasswordData {
     confirmPassword: string;
 }
 
-export type Status = PO_STATUS | undefined;
+export type Status = PO_STATUS | MASS_UPLOAD_STATUS | undefined;
 
 export type ApiCallFn = (url: string) => Promise<unknown>;

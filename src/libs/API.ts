@@ -55,6 +55,12 @@ export default class API {
         return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;
     }
 
+    static massUploads(): string;
+    static massUploads(...chunks: chunks): string {
+        const prefix = '/uploads';
+        return `${this.api}${prefix}${this.joinChunks(...chunks)}`;
+    }
+
     static uploads(): string;
     static uploads(...chunks: chunks): string {
         const prefix = '/uploads';

@@ -1,4 +1,6 @@
-export interface UploadDTO {
+import {Common} from '@/typings/common';
+
+export interface UploadDTO extends Common {
     vendorOrderNo: string;
     fileName: string;
     orderNo: number;
@@ -6,7 +8,8 @@ export interface UploadDTO {
     uploadType: string;
     errors: Array<UploadError>;
     uploadRefNo: number;
-    status: UploadStatus;
+    uploaded: string;
+    status: MASS_UPLOAD_STATUS;
 }
 
 export interface UploadError {
@@ -20,9 +23,9 @@ export enum UploadTypes {
     PO_UPLOAD = 'PO_UPLOAD',
 }
 
-export enum UploadStatus {
-    PENDING = 'pending',
-    REJECTED = 'rejected',
-    VALIDATED = 'validated',
-    ERROR = 'error',
+export enum MASS_UPLOAD_STATUS {
+    PENDING = 'PENDING',
+    REJECTED = 'REJECTED',
+    VALIDATED = 'VALIDATED',
+    ERROR = 'ERROR',
 }
