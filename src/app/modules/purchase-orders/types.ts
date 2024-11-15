@@ -78,6 +78,39 @@ export interface PurchaseOrderItemLocationListDTO extends Common {
     earliestShipmentDate: CommonDate;
 }
 
+export interface PurchaseOrderItemLocationListDTO extends Common {
+    item: string;
+    totalItemQuantity: number;
+    itemDescription: string;
+    countryOfSourcing: string;
+    costSource: string;
+    location: number;
+    locationType: string;
+    locationName: string;
+    unitOfPurchase: string;
+    quantity: number;
+    variance: string;
+    currency: string;
+    estimatedInStockDate: CommonDate;
+    itemType: string;
+    itemParent: string;
+    itemGrandparent: string;
+    color: string;
+    style: string;
+    size: string;
+    detailedColorDescription: string;
+    localCurrency: string;
+    nonScaling: string;
+    unitCostUop: number;
+    supplierUnitCost: number;
+    unitElcUop: string;
+    totalElcUop: string;
+    vpn: string;
+    cancelledQtyUop: string;
+    latestShipmentDate: CommonDate;
+    earliestShipmentDate: CommonDate;
+}
+
 export interface PurchaseOrderDTO extends Common {
     baseAndSupplierCurrency: number;
     canceledCost: null;

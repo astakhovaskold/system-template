@@ -17,10 +17,10 @@ const OrderItem = memo((): JSX.Element | null => {
                 <span className="text-base">
                     &bull;&nbsp; Total quantity &nbsp;
                     {item.totalQuantity}
-                </span>
-                <Status status={item.status} />
+                Total quantity &nbsp;
+                {item.quantity}
+            </span><Status status={item.status} />
             </div>
-
             <LocationList />
         </div>
     );
