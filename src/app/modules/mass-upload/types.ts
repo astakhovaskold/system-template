@@ -20,6 +20,7 @@ export interface UploadError {
 
 export enum UploadTypes {
     PO_UPLOAD = 'PO_UPLOAD',
+    PO_AND_ITEM = 'PO+ITEM_UPLOAD',
 }
 
 export enum MASS_UPLOAD_STATUS {

@@ -12,6 +12,10 @@ const SELECT_OPTIONS = [
         label: 'PO Upload',
         value: UploadTypes.PO_UPLOAD,
     },
+    {
+        label: 'PO+Item Upload',
+        value: UploadTypes.PO_AND_ITEM,
+    },
 ];
 
 const {Text} = Typography;
