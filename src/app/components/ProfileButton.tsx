@@ -1,4 +1,4 @@
-import {DownOutlined, UserOutlined} from '@ant-design/icons';
+import {DownOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
 import styled from '@emotion/styled';
 import {Avatar, Button, Col, Divider, Popover, Row, Space, Typography} from 'antd';
 import {memo, useMemo} from 'react';
@@ -32,9 +32,10 @@ const UserInfo = styled.div`
 const ProfileButton = memo<ProfileButtonProps>(({simple = false}): JSX.Element | null => {
     const {account, logout} = useAccount(state => state);
 
-    const button = useMemo(
+    const logoutButton = useMemo(
         () => (
-            <Button type="primary" onClick={logout}>
+            <Button onClick={logout} type="text" block className="justify-start">
+                <LogoutOutlined />
                 Log out
             </Button>
         ),
@@ -47,7 +48,7 @@ const ProfileButton = memo<ProfileButtonProps>(({simple = false}): JSX.Element |
                 <>
                     {simple ? (
                         <Row align="middle" justify="end" gutter={8} wrap={false}>
-                            <Col>{button}</Col>
+                            <Col className="w-40">{logoutButton}</Col>
                         </Row>
                     ) : (
                         <Content>
@@ -74,11 +75,7 @@ const ProfileButton = memo<ProfileButtonProps>(({simple = false}): JSX.Element |
                                     <Link to="change-password">Change pasword</Link>
                                 </Col>
 
-                                <Col>
-                                    <Button type="primary" onClick={logout}>
-                                        Log out
-                                    </Button>
-                                </Col>
+                                <Col>{logoutButton}</Col>
                             </Row>
                         </Content>
                     )}
