@@ -1,6 +1,6 @@
 import {CloseCircleFilled} from '@ant-design/icons';
 import {Button, Checkbox, Form, Input, Select, Typography} from 'antd';
-import {memo, useCallback, useState} from 'react';
+import {memo, useCallback} from 'react';
 
 import SignInBg from '@/assets/icons/signin-bg.svg?react';
 import {MOCK_EMAIL, MOCK_PASSWORD, mockAccount} from '@/libs/mockData';
@@ -27,17 +27,12 @@ const ENVIRONMENT_OPTIONS = [
 const Auth = memo((): JSX.Element | null => {
     const auth = useAccount(state => state.auth);
 
-    const [authError, setAuthError] = useState(false);
-
     const [form] = Form.useForm();
 
     const onFinish = useCallback(
         ({email, password}: LoginData) => {
             if (email === MOCK_EMAIL && password === MOCK_PASSWORD) {
-                setAuthError(false);
                 auth(mockAccount);
-            } else {
-                setAuthError(true);
             }
         },
         [auth],
@@ -63,25 +58,23 @@ const Auth = memo((): JSX.Element | null => {
                     className="pt-60 w-[400px] mx-auto"
                     layout="vertical"
                     onFinish={onFinish}
-                    onValuesChange={() => setAuthError(false)}
+                    requiredMark={false}
                 >
                     <Title level={1}>Sign In</Title>
 
                     <Item
                         label="Email Address"
                         name="email"
-                        rules={[{type: 'email', message: ''}]}
-                        help={null}
-                        hasFeedback={!authError}
+                        rules={[
+                            {required: true, message: ''},
+                            {type: 'email', message: ''},
+                        ]}
+                        hasFeedback={{icons: () => ({error: <CloseCircleFilled className="text-error" />})}}
                     >
-                        <Input
-                            placeholder="Email Address"
-                            type="email"
-                            suffix={authError ? <CloseCircleFilled className="text-error" /> : null}
-                        />
+                        <Input placeholder="Email Address" type="email" />
                     </Item>
 
-                    <Item label="Password" name="password">
+                    <Item label="Password" name="password" rules={[{required: true, message: ''}]}>
                         <Password autoComplete="current-password" placeholder="Password" />
                     </Item>
 
