@@ -32,6 +32,8 @@ const LinkStyled = styled(Link)<{delay: number}>`
     grid-column: 4 span;
     max-width: 100%;
 
+    white-space: pre-wrap;
+
     animation-name: ${animationShowing};
     animation-delay: ${({delay}) => 50 + delay}ms;
     animation-duration: 0.2s;
@@ -58,6 +60,11 @@ const LinkStyled = styled(Link)<{delay: number}>`
         .ant-card-body {
             outline: auto var(--color-primary);
         }
+    }
+
+    svg {
+        height: 40px;
+        width: 40px;
     }
 `;
 
