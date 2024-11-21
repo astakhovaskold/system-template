@@ -11,7 +11,7 @@ const POHeader = memo<HeaderAndSupplierProps>((): JSX.Element | null => {
 
     if (!item) return null;
 
-    const {supplierName, supplierCode, supplierSiteId, vendorOrdNo} = item;
+    const {supplierName, supplierCode, supplierSiteId, vendorOrderId} = item;
 
     return (
         <DescriptionList
@@ -23,8 +23,8 @@ const POHeader = memo<HeaderAndSupplierProps>((): JSX.Element | null => {
                 },
                 {label: 'Supplier Name', value: supplierName},
                 {label: 'Supplier Code', value: supplierCode},
-                {label: 'Supplier Site Id', value: supplierSiteId},
-                {label: 'Vendor Order #', value: vendorOrdNo},
+                {label: 'Supplier Site', value: supplierSiteId},
+                {label: 'Vendor Order #', value: vendorOrderId},
             ]}
         />
     );

@@ -1,5 +1,5 @@
 import {UploadDTO} from '@/app/modules/mass-upload/types';
-import {PurchaseOrderListDTO} from '@/app/modules/purchase-orders/types';
+import {PurchaseOrderItemDTO, PurchaseOrderListDTO} from '@/app/modules/purchase-orders/types';
 import {UserDTO} from '@/store/account/types';
 
 export type chunks = Array<unknown>;
@@ -50,14 +50,19 @@ export default class API {
     }
 
     static purchaseOrders(): string;
-    static purchaseOrders(id: PurchaseOrderListDTO['id']): string;
+    static purchaseOrders(
+        id: PurchaseOrderListDTO['id'],
+        command?: 'items',
+        entityId?: PurchaseOrderItemDTO['id'],
+        command2?: 'locations',
+    ): string;
     static purchaseOrders(...chunks: chunks): string {
         const prefix = '/purchase-orders';
         return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;
     }
 
     static massUploads(): string;
-    static massUploads(id: UploadDTO['uploadRefNo']): string;
+    static massUploads(id: UploadDTO['id']): string;
     static massUploads(...chunks: chunks): string {
         const prefix = '/uploads';
         return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;

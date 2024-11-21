@@ -13,9 +13,6 @@ function useStatusColor(status: Status): string {
             case PO_STATUS.APPROVED:
                 return 'success';
 
-            case PO_STATUS.REJECTED:
-                return 'error';
-
             case PO_STATUS.PENDING:
                 return 'warning';
 

@@ -1,8 +1,9 @@
+import {CloseCircleFilled} from '@ant-design/icons';
 import {Button, Checkbox, Form, Input, Select, Typography} from 'antd';
-import {memo, useCallback} from 'react';
+import {memo, useCallback, useState} from 'react';
 
 import SignInBg from '@/assets/icons/signin-bg.svg?react';
-import {mockAccount} from '@/libs/mockData';
+import {MOCK_EMAIL, MOCK_PASSWORD, mockAccount} from '@/libs/mockData';
 import useAccount from '@/store/account/account';
 import {LoginData} from '@/store/account/types';
 
@@ -26,10 +27,18 @@ const ENVIRONMENT_OPTIONS = [
 const Auth = memo((): JSX.Element | null => {
     const auth = useAccount(state => state.auth);
 
+    const [authError, setAuthError] = useState(false);
+
+    const [form] = Form.useForm();
+
     const onFinish = useCallback(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        (values: LoginData) => {
-            auth(mockAccount);
+        ({email, password}: LoginData) => {
+            if (email === MOCK_EMAIL && password === MOCK_PASSWORD) {
+                setAuthError(false);
+                auth(mockAccount);
+            } else {
+                setAuthError(true);
+            }
         },
         [auth],
     );
@@ -49,11 +58,27 @@ const Auth = memo((): JSX.Element | null => {
             </div>
 
             <div className="col-span-6">
-                <Form className="pt-60 w-[400px] mx-auto" onFinish={onFinish} layout="vertical">
+                <Form
+                    form={form}
+                    className="pt-60 w-[400px] mx-auto"
+                    layout="vertical"
+                    onFinish={onFinish}
+                    onValuesChange={() => setAuthError(false)}
+                >
                     <Title level={1}>Sign In</Title>
 
-                    <Item label="Email Address" name="email">
-                        <Input placeholder="Email Address" />
+                    <Item
+                        label="Email Address"
+                        name="email"
+                        rules={[{type: 'email', message: ''}]}
+                        help={null}
+                        hasFeedback={!authError}
+                    >
+                        <Input
+                            placeholder="Email Address"
+                            type="email"
+                            suffix={authError ? <CloseCircleFilled className="text-error" /> : null}
+                        />
                     </Item>
 
                     <Item label="Password" name="password">

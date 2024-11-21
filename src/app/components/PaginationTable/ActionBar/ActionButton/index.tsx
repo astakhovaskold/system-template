@@ -29,7 +29,6 @@ const ActionButton = memo<PropsWithChildren<ActionButtonProps>>(
                     return url => axios.delete(url);
 
                 case PO_STATUS.CLOSED:
-                case PO_STATUS.REJECTED:
                 case PO_STATUS.APPROVED:
                 case PO_STATUS.PENDING:
                     return url => axios.patch(url, {status: action});

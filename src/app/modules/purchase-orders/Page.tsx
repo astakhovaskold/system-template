@@ -7,14 +7,14 @@ import PageContainer from '@/app/components/Layout/PageContainer';
 import Context from '@/app/modules/purchase-orders/Context';
 import {PurchaseOrderDTO} from '@/app/modules/purchase-orders/types';
 import View from '@/app/modules/purchase-orders/views/View';
-import APIMock from '@/libs/APIMock';
+import API from '@/libs/API';
 
 interface PageProps {}
 
 const Page = memo<PageProps>((): JSX.Element | null => {
     const {id} = useParams();
 
-    const {data: item, isLoading} = useQuery<PurchaseOrderDTO>({queryKey: [APIMock.purchaseOrders(Number(id))]});
+    const {data: item, isLoading} = useQuery<PurchaseOrderDTO>({queryKey: [API.purchaseOrders(Number(id))]});
 
     return (
         <Spin size="large" spinning={isLoading}>

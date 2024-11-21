@@ -5,6 +5,8 @@ import {ColumnsType, ColumnType} from 'antd/es/table';
 import {SortOrder} from 'antd/es/table/interface';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
+import Header from './components/Header';
+import Context from './Context';
 import {PaginationResult, PaginationTableProps} from './types';
 
 import ActionBar from '@/app/components/PaginationTable/ActionBar';
@@ -31,6 +33,8 @@ function PaginationTable<T extends Common>({
     uid = url,
     defaultSort,
     actions,
+    buttons,
+    tableProps,
 }: PaginationTableProps<T>) {
     const [params, setParams] = useParamsPagination(uid);
     const [filter] = useFilterPagination(uid);
@@ -105,9 +109,7 @@ function PaginationTable<T extends Common>({
             baseColumns.map(column => {
                 const {key, hidden: hiddenByDefault} = column;
 
-                const hidden = !(Array.isArray(columnsPagination) && columnsPagination.length > 0
-                    ? columnsPagination.includes(key as string)
-                    : !hiddenByDefault);
+                const hidden = columnsPagination.find(c => c.key === key)?.hidden ?? hiddenByDefault;
 
                 if (sortName && column.sorter) {
                     if (key === sortName) {
@@ -139,7 +141,7 @@ function PaginationTable<T extends Common>({
 
     useEffect(() => {
         if (!columnsPagination || (Array.isArray(columnsPagination) && columnsPagination.length === 0)) {
-            const columnsByConfig = baseColumns.filter(({hidden}) => !hidden).map(({key}) => key as string);
+            const columnsByConfig = baseColumns.map(({key, hidden}) => ({key: key as string, hidden: !!hidden}));
 
             setColumnsPagination(columnsByConfig);
             setConfig(columnsByConfig);
@@ -162,8 +164,11 @@ function PaginationTable<T extends Common>({
     );
 
     return (
-        <>
+        <Context.Provider value={{url, columns: baseColumns}}>
+            <Header>{buttons?.map(button => button)}</Header>
+
             <Table<T>
+                {...tableProps}
                 rowKey="id"
                 rowSelection={hasSelection ? rowSelection : undefined}
                 columns={columns}
@@ -190,7 +195,7 @@ function PaginationTable<T extends Common>({
                     ))}
                 </ActionBar>
             )}
-        </>
+        </Context.Provider>
     );
 }
 

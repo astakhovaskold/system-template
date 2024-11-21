@@ -23,13 +23,13 @@ const View = memo((): JSX.Element | null => {
 
     if (!item) return null;
 
-    const {importCountry, supplierName, poStatus} = item;
+    const {importCountry, supplierName, status} = item;
 
     return (
         <>
             <div className="flex items-center gap-x-3">
                 <Supplier supplierName={supplierName} supplierCountry={importCountry} />
-                <Status status={poStatus} />
+                <Status status={status} />
             </div>
 
             <Tabs

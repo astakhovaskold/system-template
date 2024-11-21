@@ -5,7 +5,7 @@ import {memo, useCallback, useMemo, useState} from 'react';
 
 import FileUploader from '@/app/components/FileUploader/FileUploader';
 import {UploadDTO, UploadTypes} from '@/app/modules/mass-upload/types';
-import APIMock from '@/libs/APIMock';
+import API from '@/libs/API';
 
 const SELECT_OPTIONS = [
     {
@@ -61,7 +61,7 @@ const MassUploadButton = memo((): JSX.Element | null => {
                         <Select placeholder="Upload type" options={SELECT_OPTIONS} />
                     </div>
                     <FileUploader<UploadDTO>
-                        url={APIMock.uploads()}
+                        url={API.uploads()}
                         accept={['.csv']}
                         maxFileSize={2048}
                         setFileList={setFileList}

@@ -8,13 +8,13 @@ import PageContainer from '@/app/components/Layout/PageContainer';
 import Context from '@/app/modules/mass-upload/Context';
 import {UploadDTO} from '@/app/modules/mass-upload/types';
 import View from '@/app/modules/mass-upload/views/View';
-import APIMock from '@/libs/APIMock';
+import API from '@/libs/API';
 
 interface PageProps {}
 
 const Page = memo<PageProps>((): JSX.Element | null => {
     const {id} = useParams();
-    const {data: item, isLoading} = useQuery<UploadDTO>({queryKey: [APIMock.massUploads(Number(id))]});
+    const {data: item, isLoading} = useQuery<UploadDTO>({queryKey: [API.massUploads(Number(id))]});
 
     return (
         <Spin size="large" spinning={isLoading}>

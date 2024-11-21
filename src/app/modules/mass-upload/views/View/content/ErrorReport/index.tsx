@@ -4,7 +4,6 @@ import {memo, useContext} from 'react';
 import Context from '@/app/modules/mass-upload/Context';
 import {UploadError} from '@/app/modules/mass-upload/types';
 import columns from '@/app/modules/mass-upload/views/View/content/ErrorReport/columns';
-import Filter from '@/app/modules/mass-upload/views/View/content/ErrorReport/Filter';
 
 const {Title} = Typography;
 const ErrorReport = memo((): JSX.Element | null => {
@@ -17,7 +16,6 @@ const ErrorReport = memo((): JSX.Element | null => {
             <Title className="!m-0" level={3}>
                 Error Report
             </Title>
-            <Filter />
             <Table<UploadError>
                 pagination={false}
                 columns={columns}

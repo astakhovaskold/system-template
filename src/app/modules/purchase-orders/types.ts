@@ -5,121 +5,174 @@ export interface SupplierDTO extends Common {
     country: string;
 }
 
-export interface PurchaseOrderItemDTO extends Common {
-    unitCostUOP?: number | null;
-    itemType: string; // enum ?
-    color: string;
-    unitOfPurchase: number; // reference to DTO ?
-    totalELCUOP?: number | null;
-    locationType: string; // enum ?
-    locationName: string;
-    location: number;
-    costSource: string; // reference ?
-    localCurrency: string; // enum ?
-    unitELCUOP?: number | null;
-    itemParent: string; // ItemDTO
-    currency: string; // enum ?
-    itemDescription: string;
-    latestShipmentDate: CommonDate;
-    estimatedInStockDate: CommonDate;
-    itemGrandParent: string; // ItemDTO ?
-    nonScaling: string;
+export interface PurchaseOrderItemListDTO extends Common {
     cancelledQtyUOP?: number | null;
-    supplierUnitCost?: number | null;
-    item: string; // enum ?
-    quantity: number;
+    color: string;
+    costSource: string; // reference ?
     countryOfSourcing: string; // CountryDTO ?
+    currency: string; // enum ?
+    detailedColorDescription: string;
+    estimatedInStockDate: CommonDate;
+    earliestShipmentDate: CommonDate;
+    item: string; // enum ?
+    itemDescription: string;
+    itemGrandParent: string; // ItemDTO ?
+    itemParent: string; // ItemDTO
+    itemType: string; // enum ?
+    location: number;
+    locationName: string;
+    locationType: string; // enum ?
+    latestShipmentDate: CommonDate;
+    localCurrency: string; // enum ?
+    nonScaling: string;
+    quantity: number;
     size: string; // enum ?
     style: string; // enum ?
+    superUnitCost?: number | null; // suggestion for clarity, see below
+    totalELCUOP?: number | null;
+    unitCostUOP?: number | null;
+    unitELCUOP?: number | null;
+    unitOfPurchase: number; // reference to DTO ?
     variance: number;
     vpn: string; // enum ?
-    earliestShipmentDate: CommonDate;
+}
+
+export interface PurchaseOrderItemDTO extends Common {
+    supplierName: string;
+    orderType: string;
+    totalQuantity: number;
+    status: PO_STATUS;
+    isPack: boolean;
+}
+
+export interface PurchaseOrderItemLocationListDTO extends Common {
+    item: string;
+    totalItemQuantity: number;
+    itemDescription: string;
+    countryOfSourcing: string;
+    costSource: string;
+    location: number;
+    locationType: string;
+    locationName: string;
+    unitOfPurchase: string;
+    quantity: number;
+    variance: string;
+    currency: string;
+    estimatedInStockDate: CommonDate;
+    itemType: string;
+    itemParent: string;
+    itemGrandparent: string;
+    color: string;
+    style: string;
+    size: string;
     detailedColorDescription: string;
+    localCurrency: string;
+    nonScaling: string;
+    unitCostUop: number;
+    supplierUnitCost: number;
+    unitElcUop: string;
+    totalElcUop: string;
+    vpn: string;
+    cancelledQtyUop: string;
+    latestShipmentDate: CommonDate;
+    earliestShipmentDate: CommonDate;
 }
 
 export interface PurchaseOrderDTO extends Common {
-    orderType: string;
-    importer: number; // reference to ImporterDTO ?
-    includeOnOrder: string;
-    importOrder: string;
-    estimatedRDCInStock: CommonDate;
-    discount?: number | null;
-    primaryCurrency: string; // enum ?
-    totalOrderCost: null;
+    baseAndSupplierCurrency: number;
     canceledCost: null;
-    exchangeRate?: number | null; // is correct type ?
     contact: string; // ?
+    department: string;
+    discount?: number | null;
     ediPO: string; // ?
-    poStatus: PO_STATUS;
-    qcRequired: string;
+    estimatedRDCInStock: CommonDate;
+    earliestShipDate: CommonDate;
+    exchangeRate?: number | null; // is correct type ?
+    expenses?: number | null;
+    includeOnOrder: string;
+    importCountry: string; // enum or DTO ?
+    importOrder: string;
+    importer: number; // reference to ImporterDTO ?
+    landedCost?: number | null;
     latestShipmentDate: CommonDate;
+    location: string; // reference to LocationDTO ?
+    locationPickUp: string;
+    notAfterDate: CommonDate;
+    notBeforeDate: CommonDate;
+    orderApprovalDate: CommonDate;
+    orderCurrency: string; // enum ?
+    orderExchangeRate: number;
+    orderNo: number;
+    orderType: string;
+    otbEndOfWeekDate: CommonDate;
+    outstandingCost?: number | null;
+    paymentTermsName: string; // enum ?
+    payMethod: string;
+    poType: PO_TYPE;
+    primaryCurrency: string; // enum ?
+    qcRequired: string;
+    raisedBy: string;
+    routingLocationId: number;
+    status: PO_STATUS;
     supplierCode: number; // reference to SupplierDTO ?
     supplierName: string; // reference to SupplierDTO ?
     supplierSiteId: number; // reference to SupplierDTO ?
-    otbEndOfWeekDate: CommonDate;
-    orderNo: number;
-    landedCost?: number | null;
-    orderCurrency: string; // enum ?
-    notAfterDate: CommonDate;
-    notBeforeDate: CommonDate;
-    importCountry: string; // enum or DTO ?
-    outstandingCost?: number | null;
-    locationPickUp: string;
-    earliestShipDate: CommonDate;
-    vendorOrdNo: string; // string or number ?
-    paymentTermsName: string; // enum ?
-    orderApprovalDate: CommonDate;
-    location: string; // reference to LocationDTO ?
-    poType: PO_TYPE;
-    items: Array<PurchaseOrderItemDTO>;
-    expenses?: number | null;
+    totalOrderCost: null;
+    vendorOrderId: number; // string or number ?
 }
 
 export interface PurchaseOrderListDTO extends Common {
-    orderType: string;
-    totalOrderRetailExcVAT: number;
-    discount: number;
-    totalVAT: number;
-    routingLocation: string;
-    canceledCost: number;
-    payMethod: string;
-    department: number;
-    otbEndOfWeekDate: string;
-    orderNo: number;
-    landedCost: number;
-    orderCurrency: string;
-    notAfterDate: string;
-    importBillToLocType: string;
-    notBeforeDate: string;
     backhaulAllowance: number;
-    importCountry: string;
-    outstandingCost: number;
-    markupPercentRetail: number;
     backhaulType: string;
-    vendorOrdNo: string;
+    canceledCost: number;
     countryOfSourcing: string;
-    totalOrderRetailIncVAT: number;
-    orderApprovalDate: string;
-    pickupDate: string;
+    created: CommonDate;
+    department: number;
+    discountOff: number;
     duty: number;
-    poType: string;
-    importBillToLoc: number;
-    orderExchangeRate: number;
-    promotion: number;
     expenses: number;
-    totalOrderCost: number;
+    group: string;
+    importerBillToLoc: number;
+    importBillToLocType: string;
+    importCountry: string;
+    importId: number;
+    importOrderInd: number;
+    landedCost: number;
+    markupPercentRetail: number;
+    markupRetailExclVat: number;
+    notAfterDate: string;
+    notBeforeDate: string;
+    orderApprovalDate: CommonDate;
+    orderCurrency: string;
+    orderExchangeRate: number;
+    orderItems: Array<PurchaseOrderItemListDTO> | null;
+    orderNo: number;
+    orderType: string;
+    origApprovalDate: CommonDate;
+    otbEndOfWeekDate: CommonDate;
+    outstandingCost: number;
+    pickupDate: CommonDate;
+    payMethod: string;
+    poType: PO_TYPE;
+    promotion: number;
     raisedBy: string;
-    supplierName: SupplierDTO['title'];
-    supplierCode: number;
-    supplierSiteId: number;
+    routingLocationId: number;
     status: PO_STATUS;
+    supplierCode: number;
+    supplierCountry: string; // reference to SupplierDTO ?
+    supplierName: SupplierDTO['title'];
+    supplierSiteId: number;
+    totalOrderCost: number;
+    totalOrderRetailExclVAT: number;
+    totalOrderRetailInclVAT: number;
+    totalVAT: number;
+    vendorOrderId: string;
 }
 
 export enum PO_STATUS {
-    APPROVED = 'approved',
-    REJECTED = 'rejected',
-    PENDING = 'pending',
-    CLOSED = 'closed',
+    APPROVED = 'Approved',
+    PENDING = 'Pending',
+    CLOSED = 'Close',
 }
 
 export enum PO_TYPE {

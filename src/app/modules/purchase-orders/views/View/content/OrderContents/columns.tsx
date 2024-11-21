@@ -1,9 +1,9 @@
 import {ColumnsType} from 'antd/es/table';
 
 import DateView from '@/app/components/Presentation/DateView';
-import {PurchaseOrderItemDTO} from '@/app/modules/purchase-orders/types';
+import {PurchaseOrderItemListDTO} from '@/app/modules/purchase-orders/types';
 
-const columns: ColumnsType<PurchaseOrderItemDTO> = [
+const columns: ColumnsType<PurchaseOrderItemListDTO> = [
     {
         dataIndex: 'id',
         key: 'id',
@@ -127,6 +127,12 @@ const columns: ColumnsType<PurchaseOrderItemDTO> = [
         hidden: true,
     },
     {
+        dataIndex: 'unitCostUOP',
+        key: 'unitCostUOP',
+        title: 'Unit Cost UOP',
+        hidden: true,
+    },
+    {
         dataIndex: 'supplierUnitCost',
         key: 'supplierUnitCost',
         title: 'Supplier Unit Cost',
@@ -148,12 +154,6 @@ const columns: ColumnsType<PurchaseOrderItemDTO> = [
         dataIndex: 'vpn',
         key: 'vpn',
         title: 'VPN',
-        hidden: true,
-    },
-    {
-        dataIndex: 'unitCostUOP',
-        key: 'unitCostUOP',
-        title: 'Unit Cost UOP',
         hidden: true,
     },
     {

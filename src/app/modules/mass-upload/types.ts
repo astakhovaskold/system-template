@@ -1,13 +1,12 @@
 import {Common} from '@/typings/common';
 
 export interface UploadDTO extends Common {
-    vendorOrderNo: string;
+    vendorOrderId: string;
     fileName: string;
-    orderNo: number;
+    orderId: number;
     createdBy: string;
     uploadType: string;
     errors: Array<UploadError>;
-    uploadRefNo: number;
     uploaded: string;
     status: MASS_UPLOAD_STATUS;
 }
@@ -24,8 +23,9 @@ export enum UploadTypes {
 }
 
 export enum MASS_UPLOAD_STATUS {
-    PENDING = 'PENDING',
-    REJECTED = 'REJECTED',
-    VALIDATED = 'VALIDATED',
-    ERROR = 'ERROR',
+    WORKSHEET = 'Worksheet',
+    ERROR = 'Error',
+    VALIDATED = 'Validated',
+    UPLOADED = 'Uploaded',
+    THREADED_AND_EXECUTING = 'Threaded and Executing',
 }

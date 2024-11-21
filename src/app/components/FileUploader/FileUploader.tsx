@@ -1,8 +1,8 @@
 import {InboxOutlined} from '@ant-design/icons';
-import {Typography, Upload} from 'antd';
+import {message, Typography, Upload} from 'antd';
 import {RcFile} from 'antd/es/upload';
 import {UploadChangeParam, UploadFile, UploadProps} from 'antd/es/upload/interface';
-import axios, {AxiosError, AxiosRequestConfig} from 'axios';
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
 import {
@@ -12,12 +12,18 @@ import {
 } from '@/app/components/FileUploader/constants';
 import {FileUploaderProps} from '@/app/components/FileUploader/types';
 import Utils from '@/libs/Utils';
+import {Common} from '@/typings/common';
 
 const {Dragger} = Upload;
 
 const {Text} = Typography;
 
-function FileUploader<ResponseType>({accept, url, maxFileSize, setFileList}: FileUploaderProps): JSX.Element | null {
+function FileUploader<ResponseType extends Common>({
+    accept,
+    url,
+    maxFileSize,
+    setFileList,
+}: FileUploaderProps): JSX.Element | null {
     const [error, setError] = useState<null | string>(null);
     const controller = useRef<AbortController | null>(null);
 
@@ -43,11 +49,22 @@ function FileUploader<ResponseType>({accept, url, maxFileSize, setFileList}: Fil
             };
 
             try {
-                const response = await axios.post<typeof file, ResponseType>(url, formData, config);
+                const response = await axios.post<typeof file, AxiosResponse<ResponseType>>(url, formData, config);
                 onSuccess?.(response);
+                message.success({
+                    content: (
+                        <>
+                            <span className="text-processing">{response.data.id}</span>
+                            &nbsp;was sucessfully created
+                        </>
+                    ),
+                    className: 'flex justify-end',
+                });
             } catch (error) {
                 onError?.(error as unknown as AxiosError);
-                setError?.((error as unknown as AxiosError)?.response?.data as string);
+                if (axios.isAxiosError(error)) {
+                    setError?.(error?.response?.data?.error as string);
+                }
             }
         },
         [setError, url],

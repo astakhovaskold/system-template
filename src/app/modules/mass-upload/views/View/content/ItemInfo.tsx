@@ -10,7 +10,7 @@ const ItemInfo = memo((): JSX.Element | null => {
 
     if (!item) return null;
 
-    const {uploadRefNo, orderNo, vendorOrderNo, uploadType, createdBy, uploaded, status} = item;
+    const {id, orderId, vendorOrderId, uploadType, createdBy, uploaded, status} = item;
 
     return (
         <DescriptionList
@@ -18,10 +18,10 @@ const ItemInfo = memo((): JSX.Element | null => {
             dataSource={[
                 {
                     label: 'Upload Ref. #',
-                    value: uploadRefNo,
+                    value: id,
                 },
-                {label: 'Order #', value: orderNo},
-                {label: 'Vendor Order #', value: vendorOrderNo},
+                {label: 'Order #', value: orderId},
+                {label: 'Vendor Order #', value: vendorOrderId},
                 {label: 'Upload Type', value: uploadType},
                 {label: 'Created By', value: createdBy},
                 {label: 'Uploaded', value: <DateView date={uploaded} />},

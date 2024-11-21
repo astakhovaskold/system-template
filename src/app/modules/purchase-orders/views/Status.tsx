@@ -15,9 +15,6 @@ const Status = memo<Props>(({status}): JSX.Element | null => {
             case PO_STATUS.APPROVED:
                 return 'success';
 
-            case PO_STATUS.REJECTED:
-                return 'error';
-
             case PO_STATUS.PENDING:
                 return 'warning';
 
@@ -33,7 +30,7 @@ const Status = memo<Props>(({status}): JSX.Element | null => {
             })}
             color={color}
         >
-            {status.toString().toLowerCase()}
+            {status?.toString().toLowerCase()}
         </Tag>
     );
 });

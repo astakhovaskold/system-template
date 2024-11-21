@@ -1,17 +1,11 @@
 import {SearchOutlined} from '@ant-design/icons';
 import {Button, Checkbox, Dropdown, Form, Input, MenuProps} from 'antd';
-import {ColumnsType} from 'antd/es/table';
 
-import {CSSProperties, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {CSSProperties, memo, useCallback, useContext, useEffect, useMemo, useState} from 'react';
 
+import Context from '@/app/components/PaginationTable/Context';
 import useColumnsPagination from '@/hooks/pagination/useColumnsPagination';
 import useConfigPagination from '@/hooks/pagination/useConfigPagination';
-import useClickAway from '@/hooks/useClickAway';
-
-interface EditTableButtonProps<T> {
-    url: string;
-    items: ColumnsType<T>;
-}
 
 const {Item} = Form;
 
@@ -20,48 +14,55 @@ const scrollbarStyle: CSSProperties = {
     scrollbarWidth: 'thin',
 };
 
-function EditTableButton<T>({url, items: itemsBase}: EditTableButtonProps<T>): JSX.Element | null {
+const EditTableButton = memo((): JSX.Element | null => {
+    const {url, columns} = useContext(Context);
+
     const [search, setSearch] = useState('');
 
-    const [columns, setColumns] = useColumnsPagination(url);
+    const [columnsPagination, setColumnsPagination] = useColumnsPagination(url);
     const [config] = useConfigPagination(url, 'columns');
 
     const [open, setOpen] = useState(false);
+
     const [selected, setSelected] = useState<Array<string>>([]);
 
+    const items = useMemo(() => {
+        if (!search) return columns;
+
+        return columns.filter(({key, title}) => {
+            const regexp = new RegExp(search, 'gi');
+
+            return typeof key === 'string' && typeof title === 'string' && search
+                ? title.match(regexp) || key.match(regexp)
+                : true;
+        });
+    }, [columns, search]);
+
+    // const onCancel = useCallback(() => {
+    //     setSelected(columnsKeys);
+    //     setOpen(false);
+    // }, [columnsKeys]);
+
+    const columnsKeys = columnsPagination?.filter(c => !c.hidden)?.map(c => c.key);
+
     useEffect(() => {
-        if (Array.isArray(columns) && columns.length > 0) {
-            setSelected(columns);
-        }
-    }, [columns]);
-
-    const dropdown = useRef<HTMLElement | null>(null);
-
-    const items = useMemo(
-        () =>
-            itemsBase.filter(({key, title}) => {
-                const regexp = new RegExp(search, 'gi');
-
-                return typeof key === 'string' && typeof title === 'string' && search
-                    ? title.match(regexp) || key.match(regexp)
-                    : true;
-            }),
-        [itemsBase, search],
-    );
-
-    const onCancel = useCallback(() => {
-        setSelected(columns);
-        setOpen(false);
-    }, [columns]);
+        if (selected.length === 0) setSelected(columnsKeys);
+    }, [columnsKeys, selected.length]);
 
     const onOk = useCallback(() => {
-        setColumns(selected);
-        setOpen(false);
-    }, [selected, setColumns]);
+        const columnsCurrent = columnsPagination.map(({key}) => ({
+            key: key as string,
+            hidden: !selected.includes(key),
+        }));
 
-    useClickAway(dropdown, () => {
-        onCancel();
-    }, ['click']);
+        setColumnsPagination(columnsCurrent);
+        setSearch('');
+        setOpen(false);
+    }, [columnsPagination, selected, setColumnsPagination]);
+
+    const onReset = useCallback(() => {
+        setSelected(config.map(c => c.key));
+    }, [config]);
 
     const menu = useMemo<MenuProps>(
         () => ({
@@ -81,6 +82,7 @@ function EditTableButton<T>({url, items: itemsBase}: EditTableButtonProps<T>): J
                                 <Input
                                     placeholder="Search"
                                     prefix={<SearchOutlined className="text-gray" />}
+                                    className="w-[100%]"
                                     allowClear
                                 />
                             </Item>
@@ -108,13 +110,7 @@ function EditTableButton<T>({url, items: itemsBase}: EditTableButtonProps<T>): J
                     className: '!cursor-default',
                     label: (
                         <div className="w-full flex gap-x-2">
-                            <Button
-                                onClick={() => setSelected(config)}
-                                className="text-gray"
-                                type="text"
-                                size="small"
-                                block
-                            >
+                            <Button onClick={onReset} className="text-gray" type="text" size="small" block>
                                 Reset
                             </Button>
                             <Button onClick={onOk} size="small" type="primary" block>
@@ -125,7 +121,7 @@ function EditTableButton<T>({url, items: itemsBase}: EditTableButtonProps<T>): J
                 },
             ],
         }),
-        [config, items, onOk, selected],
+        [items, onOk, onReset, selected],
     );
 
     return (
@@ -133,6 +129,6 @@ function EditTableButton<T>({url, items: itemsBase}: EditTableButtonProps<T>): J
             <Button onClick={() => setOpen(true)}>Edit Table</Button>
         </Dropdown>
     );
-}
+});
 
 export default EditTableButton;

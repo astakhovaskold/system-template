@@ -1,4 +1,7 @@
+import {TableProps} from 'antd';
 import {ColumnsType} from 'antd/es/table';
+
+import {ReactNode} from 'react';
 
 import {Common, Status} from '@/typings/common';
 
@@ -9,6 +12,10 @@ export interface PaginationTableProps<T extends Common> {
     defaultSort?: `${'' | '-'}${string & keyof T}`;
     selection?: boolean;
     actions?: Array<Action>;
+    buttons?: Array<ReactNode>;
+    tableProps?: TableProps<T>;
+    showEdit?: boolean;
+    showSearch?: boolean;
 }
 
 export interface PaginationResult<T> {

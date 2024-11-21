@@ -3,18 +3,18 @@ import {memo} from 'react';
 
 import StatusFilter from '@/app/components/StatusFilter/StatusFilter';
 import {MASS_UPLOAD_STATUS} from '@/app/modules/mass-upload/types';
-import APIMock from '@/libs/APIMock';
+import API from '@/libs/API';
 
 const Filter = memo((): JSX.Element | null => {
     return (
         <div>
             <StatusFilter<MASS_UPLOAD_STATUS>
-                url={APIMock.massUploads()}
+                url={API.massUploads()}
                 total={5}
                 options={[
                     {
-                        title: 'Pending',
-                        value: MASS_UPLOAD_STATUS.PENDING,
+                        title: 'Worksheet',
+                        value: MASS_UPLOAD_STATUS.WORKSHEET,
                         icon: <ClockCircleOutlined />,
                         amount: 25,
                     },
@@ -25,8 +25,8 @@ const Filter = memo((): JSX.Element | null => {
                         amount: 21,
                     },
                     {
-                        title: 'Rejected',
-                        value: MASS_UPLOAD_STATUS.REJECTED,
+                        title: 'Uploaded',
+                        value: MASS_UPLOAD_STATUS.UPLOADED,
                         icon: <CloseCircleOutlined />,
                         amount: 21,
                     },

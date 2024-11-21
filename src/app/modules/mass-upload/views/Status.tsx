@@ -17,7 +17,7 @@ const Status = memo<Props>(({status}): JSX.Element | null => {
             })}
             color={color}
         >
-            {status.toString().toLowerCase()}
+            {status?.toString().toLowerCase()}
         </Tag>
     );
 });

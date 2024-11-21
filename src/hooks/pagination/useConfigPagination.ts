@@ -11,7 +11,7 @@ function useConfigPagination<T extends paginationColumns>(
     config: keyof PaginationConfig,
 ): [T, setConfigFn<T>] {
     const configPagination = usePagination(
-        useShallow(state => (state.defaultConfig[config][url] as unknown as T) ?? {}),
+        useShallow(state => (state.defaultConfig[config]?.[url] as unknown as T) ?? {}),
     );
     const set = usePagination(useShallow(state => state.setConfig));
 

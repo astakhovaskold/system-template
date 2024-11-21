@@ -1,7 +1,7 @@
 import {EyeOutlined} from '@ant-design/icons';
 import {Segmented, SegmentedProps} from 'antd';
 import {SegmentedLabeledOption} from 'antd/es/segmented';
-import {useCallback} from 'react';
+import {useCallback, useMemo} from 'react';
 
 import Label from '@/app/components/StatusFilter/Label';
 import {StatusFilterLabel} from '@/app/components/StatusFilter/types';
@@ -25,6 +25,22 @@ function StatusFilter<T = Status>({url, total, value, options}: StatusFilterProp
         [setFilter],
     );
 
+    const optionsFiltered = useMemo(
+        () =>
+            options
+                .filter(({amount}) => Number.isFinite(amount) && amount > 0)
+                .map(({amount, value: status, title, ...option}) => ({
+                    ...option,
+                    value: status,
+                    label: (
+                        <Label amount={amount} status={status as Status}>
+                            {title}
+                        </Label>
+                    ),
+                })),
+        [options],
+    );
+
     return (
         <Segmented<T>
             value={(value ?? filter?.status ?? undefined) as T}
@@ -41,15 +57,7 @@ function StatusFilter<T = Status>({url, total, value, options}: StatusFilterProp
                     ),
                     icon: <EyeOutlined />,
                 },
-                ...options.map(({amount, value, title, ...option}) => ({
-                    ...option,
-                    value,
-                    label: (
-                        <Label amount={amount} status={value as Status}>
-                            {title}
-                        </Label>
-                    ),
-                })),
+                ...optionsFiltered,
             ]}
         />
     );

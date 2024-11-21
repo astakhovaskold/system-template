@@ -17,6 +17,7 @@ const columns: ColumnsType<PurchaseOrderListDTO> = [
         dataIndex: 'orderType',
         key: 'orderType',
         title: 'Order Type',
+        hidden: true,
     },
     {
         dataIndex: 'raisedBy',
@@ -64,14 +65,14 @@ const columns: ColumnsType<PurchaseOrderListDTO> = [
         hidden: true,
     },
     {
-        dataIndex: 'importBillToLoc',
-        key: 'importBillToLoc',
+        dataIndex: 'importerBillToLoc',
+        key: 'importerBillToLoc',
         title: 'Import/Bill-To Loc',
         hidden: true,
     },
     {
-        dataIndex: 'routingLocation',
-        key: 'routingLocation',
+        dataIndex: 'routingLocationId',
+        key: 'routingLocationId',
         title: 'Routing Location',
     },
     {
@@ -88,6 +89,11 @@ const columns: ColumnsType<PurchaseOrderListDTO> = [
         dataIndex: 'department',
         key: 'department',
         title: 'Department',
+    },
+    {
+        dataIndex: 'group',
+        key: 'group',
+        title: 'Group',
     },
     {
         dataIndex: 'promotion',
@@ -139,8 +145,8 @@ const columns: ColumnsType<PurchaseOrderListDTO> = [
         hidden: true,
     },
     {
-        dataIndex: 'vendorOrdNo',
-        key: 'vendorOrdNo',
+        dataIndex: 'vendorOrderId',
+        key: 'vendorOrderId',
         title: 'Vendor Ord No.',
     },
     {
@@ -190,8 +196,8 @@ const columns: ColumnsType<PurchaseOrderListDTO> = [
         hidden: true,
     },
     {
-        dataIndex: 'discount',
-        key: 'discount',
+        dataIndex: 'discountOff',
+        key: 'discountOff',
         title: 'Discount % Off',
     },
     {
@@ -201,14 +207,14 @@ const columns: ColumnsType<PurchaseOrderListDTO> = [
         hidden: true,
     },
     {
-        dataIndex: 'totalOrderRetailIncVAT',
-        key: 'totalOrderRetailIncVAT',
+        dataIndex: 'totalOrderRetailInclVAT',
+        key: 'totalOrderRetailInclVAT',
         title: 'Total Order Retail (Incl. VAT)',
         hidden: true,
     },
     {
-        dataIndex: 'totalOrderRetailExcVAT',
-        key: 'totalOrderRetailExcVAT',
+        dataIndex: 'totalOrderRetailExclVAT',
+        key: 'totalOrderRetailExclVAT',
         title: 'Total Order Retail (Excl. VAT)',
         hidden: true,
     },

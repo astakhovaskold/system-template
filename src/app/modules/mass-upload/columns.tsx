@@ -8,20 +8,20 @@ import Status from '@/app/modules/mass-upload/views/Status';
 
 const columns: ColumnsType<UploadDTO> = [
     {
-        dataIndex: 'uploadRefNo',
-        key: 'uploadRefNo',
+        dataIndex: 'id',
+        key: 'id',
         title: 'Upload Ref. #',
-        render: (_, {uploadRefNo}) => <Link to={`/mass-upload/${uploadRefNo}`}>{uploadRefNo}</Link>,
+        render: (_, {id}) => <Link to={`/mass-upload/${id}`}>{id}</Link>,
     },
     {
-        dataIndex: 'orderNo',
-        key: 'orderNo',
+        dataIndex: 'orderId',
+        key: 'orderId',
         title: 'Order #',
-        render: (_, {orderNo}) => <Link to="/mass-upload">{orderNo}</Link>,
+        render: (_, {orderId}) => <Link to="/mass-upload">{orderId}</Link>,
     },
     {
-        dataIndex: 'vendorOrderNo',
-        key: 'vendorOrderNo',
+        dataIndex: 'vendorOrderId',
+        key: 'vendorOrderId',
         title: 'Vendor Order #',
     },
     {

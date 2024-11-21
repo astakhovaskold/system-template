@@ -9,19 +9,19 @@ const Label = memo<PropsWithChildren<StatusFilterLabel>>(({amount, status, child
     const color = useMemo<BadgeProps['color']>(() => {
         switch (status) {
             case PO_STATUS.CLOSED:
-            case MASS_UPLOAD_STATUS.ERROR:
+            case MASS_UPLOAD_STATUS.WORKSHEET:
                 return 'var(--color-closed)';
 
             case PO_STATUS.APPROVED:
             case MASS_UPLOAD_STATUS.VALIDATED:
+            case MASS_UPLOAD_STATUS.UPLOADED:
                 return 'var(--color-success)';
 
-            case PO_STATUS.REJECTED:
-            case MASS_UPLOAD_STATUS.REJECTED:
+            case MASS_UPLOAD_STATUS.ERROR:
                 return 'var(--color-error)';
 
             case PO_STATUS.PENDING:
-            case MASS_UPLOAD_STATUS.PENDING:
+            case MASS_UPLOAD_STATUS.THREADED_AND_EXECUTING:
                 return 'var(--color-warning)';
 
             default:

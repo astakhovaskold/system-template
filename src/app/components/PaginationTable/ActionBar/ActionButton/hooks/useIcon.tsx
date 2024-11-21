@@ -1,7 +1,6 @@
 import {
     CheckCircleOutlined,
     ClockCircleOutlined,
-    CloseCircleOutlined,
     DeleteOutlined,
     DownloadOutlined,
     FlagOutlined,
@@ -19,9 +18,6 @@ function useIcon(status: Action): ReactNode | undefined {
 
             case PO_STATUS.APPROVED:
                 return <CheckCircleOutlined />;
-
-            case PO_STATUS.REJECTED:
-                return <CloseCircleOutlined />;
 
             case PO_STATUS.PENDING:
                 return <ClockCircleOutlined />;
