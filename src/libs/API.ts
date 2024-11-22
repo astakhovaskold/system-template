@@ -58,19 +58,19 @@ export default class API {
     ): string;
     static purchaseOrders(...chunks: chunks): string {
         const prefix = '/purchase-orders';
-        return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;
+        return `${this.poService}${this.api}${prefix}${this.joinChunks(...chunks)}`;
     }
 
     static massUploads(): string;
     static massUploads(id: UploadDTO['id']): string;
     static massUploads(...chunks: chunks): string {
         const prefix = '/uploads';
-        return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;
+        return `${this.poService}${this.api}${prefix}${this.joinChunks(...chunks)}`;
     }
 
     static uploads(): string;
     static uploads(...chunks: chunks): string {
         const prefix = '/uploads';
-        return `${this.api}${this.poService}${prefix}${this.joinChunks(...chunks)}`;
+        return `${this.poService}${this.api}${prefix}${this.joinChunks(...chunks)}`;
     }
 }
