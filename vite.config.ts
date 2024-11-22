@@ -27,7 +27,7 @@ export default ({mode}: ConfigEnv) => {
         server: {
             port: env.PORT ? Number(env.PORT) : 3000,
             proxy: {
-                '/api/v1': {
+                '/po-service/api/v1': {
                     target: env.API_URL || 'http://localhost:3000',
                     changeOrigin: true,
                     secure: false,
