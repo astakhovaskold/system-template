@@ -61,7 +61,7 @@ const EditTableButton = memo((): JSX.Element | null => {
     }, [columnsPagination, selected, setColumnsPagination]);
 
     const onReset = useCallback(() => {
-        setSelected(config.map(c => c.key));
+        setSelected(config.filter(({hidden}) => !hidden).map(c => c.key));
     }, [config]);
 
     const menu = useMemo<MenuProps>(
