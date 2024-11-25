@@ -13,8 +13,6 @@ export default ({mode}: ConfigEnv) => {
     const VERSION = env.npm_package_version;
     const APP_NAME = env.npm_package_name;
 
-    console.log(env.API_URL);
-
     return defineConfig({
         define: {
             __VERSION__: `"${VERSION}"`,
@@ -27,7 +25,7 @@ export default ({mode}: ConfigEnv) => {
         server: {
             port: env.PORT ? Number(env.PORT) : 3000,
             proxy: {
-                '/po-service/api/v1': {
+                '^/[^/]+/api/v1': {
                     target: env.API_URL || 'http://localhost:3000',
                     changeOrigin: true,
                     secure: false,
