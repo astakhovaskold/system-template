@@ -375,6 +375,7 @@ export const mockPOItem: PurchaseOrderItemDTO = {
     supplierName: 'Rose inc.',
     orderType: 'N/B',
     totalQuantity: 100,
+    quantity: 100,
     status: PO_STATUS.APPROVED,
     isPack: true,
 };
