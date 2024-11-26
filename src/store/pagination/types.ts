@@ -1,6 +1,6 @@
 export type paginationFilter = Record<string, unknown>;
 
-export type paginationColumns = Array<{key: string; hidden: boolean}>;
+export type paginationColumns = Array<{key: string; hidden: boolean; width?: number | string}>;
 
 export interface PaginationFilterData {
     url: string;

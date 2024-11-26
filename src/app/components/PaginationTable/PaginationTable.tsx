@@ -141,7 +141,11 @@ function PaginationTable<T extends Common>({
 
     useEffect(() => {
         if (!columnsPagination || (Array.isArray(columnsPagination) && columnsPagination.length === 0)) {
-            const columnsByConfig = baseColumns.map(({key, hidden}) => ({key: key as string, hidden: !!hidden}));
+            const columnsByConfig = baseColumns.map(({key, hidden, width}) => ({
+                key: key as string,
+                hidden: !!hidden,
+                width: width ?? COLUMN_WIDTH.BASE,
+            }));
 
             setColumnsPagination(columnsByConfig);
             setConfig(columnsByConfig);

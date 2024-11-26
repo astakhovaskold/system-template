@@ -1,11 +1,13 @@
 import {SearchOutlined} from '@ant-design/icons';
 import {Button, Checkbox, Dropdown, Form, Input, MenuProps} from 'antd';
 
-import {CSSProperties, memo, useCallback, useContext, useEffect, useMemo, useState} from 'react';
+import {CSSProperties, memo, useCallback, useContext, useEffect, useMemo, useRef, useState} from 'react';
 
 import Context from '@/app/components/PaginationTable/Context';
+import {sortColumnsByArray} from '@/app/components/PaginationTableDND/utils';
 import useColumnsPagination from '@/hooks/pagination/useColumnsPagination';
 import useConfigPagination from '@/hooks/pagination/useConfigPagination';
+import useClickAway from '@/hooks/useClickAway';
 
 const {Item} = Form;
 
@@ -25,18 +27,43 @@ const EditTableButton = memo((): JSX.Element | null => {
     const [open, setOpen] = useState(false);
 
     const [selected, setSelected] = useState<Array<string>>([]);
+    const [reset, setReset] = useState(false);
+
+    const dropdown = useRef<HTMLElement | null>(null);
+
+    const onClose = () => {
+        setSearch('');
+        setReset(false);
+        setOpen(false);
+    };
+
+    useClickAway(
+        dropdown,
+        () => {
+            onClose();
+        },
+        ['click'],
+        2000,
+    );
 
     const items = useMemo(() => {
+        const columnsToSort = reset ? config : columnsPagination;
+
+        const sorted = sortColumnsByArray(
+            columns,
+            columnsToSort.map(({key}) => key),
+        );
+
         if (!search) return columns;
 
-        return columns.filter(({key, title}) => {
+        return sorted.filter(({key, title}) => {
             const regexp = new RegExp(search, 'gi');
 
             return typeof key === 'string' && typeof title === 'string' && search
                 ? title.match(regexp) || key.match(regexp)
                 : true;
         });
-    }, [columns, search]);
+    }, [columns, columnsPagination, config, reset, search]);
 
     // const onCancel = useCallback(() => {
     //     setSelected(columnsKeys);
@@ -50,18 +77,21 @@ const EditTableButton = memo((): JSX.Element | null => {
     }, [columnsKeys, selected.length]);
 
     const onOk = useCallback(() => {
-        const columnsCurrent = columnsPagination.map(({key}) => ({
+        const current = reset ? config : columnsPagination;
+
+        const columnsCurrent = current.map(({key}) => ({
             key: key as string,
             hidden: !selected.includes(key),
         }));
 
         setColumnsPagination(columnsCurrent);
-        setSearch('');
-        setOpen(false);
-    }, [columnsPagination, selected, setColumnsPagination]);
+        onClose();
+    }, [columnsPagination, config, reset, selected, setColumnsPagination]);
 
     const onReset = useCallback(() => {
         setSelected(config.filter(({hidden}) => !hidden).map(c => c.key));
+
+        setReset(true);
     }, [config]);
 
     const menu = useMemo<MenuProps>(
@@ -125,7 +155,13 @@ const EditTableButton = memo((): JSX.Element | null => {
     );
 
     return (
-        <Dropdown open={open} overlayClassName="min-w-[248px]" trigger={['click']} menu={menu}>
+        <Dropdown
+            getPopupContainer={node => (dropdown.current = node)}
+            open={open}
+            overlayClassName="min-w-[248px]"
+            trigger={['click']}
+            menu={menu}
+        >
             <Button onClick={() => setOpen(true)}>Edit Table</Button>
         </Dropdown>
     );
