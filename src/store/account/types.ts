@@ -20,6 +20,7 @@ export interface RoleDTO {
 }
 
 export interface UserDTO extends Common {
+    username: string;
     email: string;
     first_name: string;
     last_name: string;
@@ -45,7 +46,7 @@ export interface AccountAction {
 }
 
 export interface LoginData {
-    email: UserDTO['email'];
+    username: UserDTO['email'];
     password: string;
 }
 

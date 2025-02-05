@@ -5,40 +5,21 @@ import Welcome from '@/app/pages/Welcome';
 import {RouteItem} from '@/router/types';
 
 const Unauthorized = lazy(() => import('@/app/pages/error/Unauthorized'));
-const PurchaseOrdersList = lazy(() => import('@/app/modules/purchase-orders/List'));
-const PurchaseOrdersPage = lazy(() => import('@/app/modules/purchase-orders/Page'));
-const PurchaseOrdersItem = lazy(() => import('@/app/modules/purchase-orders/Item'));
 
-const MassUploadList = lazy(() => import('@/app/modules/mass-upload/List'));
-const MassUploadPage = lazy(() => import('@/app/modules/mass-upload/Page'));
+const OrdersList = lazy(() => import('@/app/modules/orders/List'));
+const OrdersPage = lazy(() => import('@/app/modules/orders/Page'));
 
 const modules: Array<RouteItem> = [
     {
-        path: 'purchase-orders',
-        title: 'Purchase Orders',
-        component: PurchaseOrdersList,
+        path: 'orders',
+        title: 'Orders',
+        component: OrdersList,
         toNav: true,
     },
     {
-        path: 'purchase-orders/:id',
-        title: 'Purchase Order',
-        component: PurchaseOrdersPage,
-    },
-    {
-        path: 'purchase-orders/:id/:itemId',
-        title: 'Purchase Order',
-        component: PurchaseOrdersItem,
-    },
-    {
-        path: 'mass-upload',
-        title: 'Mass Upload',
-        component: MassUploadList,
-        toNav: true,
-    },
-    {
-        path: 'mass-upload/:id',
-        title: 'Mass Upload',
-        component: MassUploadPage,
+        path: 'orders/:id',
+        title: 'Order',
+        component: OrdersPage,
     },
 ];
 

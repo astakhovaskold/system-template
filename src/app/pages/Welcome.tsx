@@ -4,6 +4,7 @@ import {memo} from 'react';
 import WideContainer from '@/app/components/Layout/WideContainer';
 import List from '@/app/components/Modules/List';
 import Title from '@/app/components/Utils/Title';
+import {APP_NAME} from '@/libs/text';
 import useAccount from '@/store/account/account';
 
 const Welcome = memo((): JSX.Element | null => {
@@ -25,7 +26,7 @@ const Welcome = memo((): JSX.Element | null => {
                             {first_name}
                         </h1>
 
-                        <p className="text-xl">welcome to LMG Merchandising System!</p>
+                        <p className="text-xl">welcome to&nbsp;{APP_NAME}!</p>
                     </Space>
 
                     <List />

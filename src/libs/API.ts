@@ -1,5 +1,4 @@
-import {UploadDTO} from '@/app/modules/mass-upload/types';
-import {PurchaseOrderItemDTO, PurchaseOrderListDTO} from '@/app/modules/purchase-orders/types';
+import {OrderListDTO} from '@/app/modules/orders/types';
 import {UserDTO} from '@/store/account/types';
 
 export type chunks = Array<unknown>;
@@ -29,11 +28,6 @@ export default class API {
         return suffix.length ? `/${suffix}` : '';
     }
 
-    // services
-    protected static get poService(): string {
-        return '/po-service';
-    }
-
     // app
     static auth(): string;
     static auth(chunk: 'login' | 'logout' | 'refresh-token' | 'profile'): string;
@@ -49,28 +43,10 @@ export default class API {
         return `${this.api}${prefix}${this.joinChunks(...chunks)}`;
     }
 
-    static purchaseOrders(): string;
-    static purchaseOrders(
-        id: PurchaseOrderListDTO['id'],
-        command?: 'items',
-        entityId?: PurchaseOrderItemDTO['id'],
-        command2?: 'locations',
-    ): string;
-    static purchaseOrders(...chunks: chunks): string {
-        const prefix = '/purchase-orders';
-        return `${this.poService}${this.api}${prefix}${this.joinChunks(...chunks)}`;
-    }
-
-    static massUploads(): string;
-    static massUploads(id: UploadDTO['id']): string;
-    static massUploads(...chunks: chunks): string {
-        const prefix = '/uploads';
-        return `${this.poService}${this.api}${prefix}${this.joinChunks(...chunks)}`;
-    }
-
-    static uploads(): string;
-    static uploads(...chunks: chunks): string {
-        const prefix = '/uploads';
-        return `${this.poService}${this.api}${prefix}${this.joinChunks(...chunks)}`;
+    static orders(): string;
+    static orders(id: OrderListDTO['id'] | string): string;
+    static orders(...chunks: chunks): string {
+        const prefix = '/orders';
+        return `${this.api}${prefix}${this.joinChunks(...chunks)}`;
     }
 }

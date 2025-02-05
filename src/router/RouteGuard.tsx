@@ -4,6 +4,7 @@ import {Outlet, useLocation, useNavigate, useSearchParams} from 'react-router-do
 // import useHasAccess from '@/hooks/useHasAccess';
 import Title from '@/app/components/Utils/Title';
 import {useAuth} from '@/hooks/useAuth';
+import useHasAccess from '@/hooks/useHasAccess';
 import useAccount from '@/store/account/account';
 import {ROLES} from '@/store/account/types';
 
@@ -15,7 +16,7 @@ export interface RouteGuardProps {
 }
 
 export const RouteGuard = memo<RouteGuardProps>(
-    ({restrictedWithAuth = false, isPublic = false, title}): JSX.Element | null => {
+    ({restrictedWithAuth = false, isPublic = false, title, roles}): JSX.Element | null => {
         const isAuth = useAuth();
         const loggedOut = useAccount(state => state.loggedOut);
 
@@ -23,7 +24,7 @@ export const RouteGuard = memo<RouteGuardProps>(
         const {pathname} = useLocation();
         const [params] = useSearchParams();
 
-        // const hasAccess = useHasAccess(roles);
+        const hasAccess = useHasAccess(roles);
 
         const callbackUrlParam = params.get('callbackUrl');
 
@@ -42,12 +43,12 @@ export const RouteGuard = memo<RouteGuardProps>(
                 };
             }
 
-            // if (isAuth && !hasAccess) {
-            //     return {
-            //         redirect: '/unauthorized',
-            //         callbackUrl: null,
-            //     };
-            // }
+            if (isAuth && !hasAccess) {
+                return {
+                    redirect: '/unauthorized',
+                    callbackUrl: null,
+                };
+            }
 
             return {
                 redirect: null,

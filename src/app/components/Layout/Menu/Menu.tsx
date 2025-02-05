@@ -22,12 +22,8 @@ const Menu = memo<MenuProps>(({collapsed = false, className}): JSX.Element | nul
                     </MenuSection>
 
                     <MenuSection>
-                        <MenuItem href="/purchase-orders" icon={<ShoppingOutlined />}>
-                            Purchase Orders
-                        </MenuItem>
-
-                        <MenuItem href="/mass-upload" icon={<UploadOutlined />}>
-                            Mass Upload
+                        <MenuItem href="/orders" icon={<ShoppingOutlined />}>
+                            Orders
                         </MenuItem>
                     </MenuSection>
                 </ul>

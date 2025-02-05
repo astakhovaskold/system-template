@@ -5,7 +5,6 @@ import {ColumnsType, ColumnType} from 'antd/es/table';
 import {SortOrder} from 'antd/es/table/interface';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
-import Header from './components/Header';
 import Context from './Context';
 import {PaginationResult, PaginationTableProps} from './types';
 
@@ -33,7 +32,6 @@ function PaginationTable<T extends Common>({
     uid = url,
     defaultSort,
     actions,
-    buttons,
     tableProps,
 }: PaginationTableProps<T>) {
     const [params, setParams] = useParamsPagination(uid);
@@ -169,8 +167,6 @@ function PaginationTable<T extends Common>({
 
     return (
         <Context.Provider value={{url, columns: baseColumns}}>
-            <Header>{buttons?.map(button => button)}</Header>
-
             <Table<T>
                 {...tableProps}
                 rowKey="id"

@@ -10,7 +10,7 @@ import {RouteGuard} from './RouteGuard';
 
 import {routes} from '@/router/routes';
 
-const NotFound = lazy(() => import('@/app/pages/error/NotFound'));
+const UnknownError = lazy(() => import('@/app/pages/error/UnknownError'));
 
 const Navigation = memo(() => {
     return (
@@ -24,7 +24,7 @@ const Navigation = memo(() => {
                             element={<App />}
                             errorElement={
                                 <Suspense fallback={<Spin spinning />}>
-                                    <NotFound />
+                                    <UnknownError />
                                 </Suspense>
                             }
                         >

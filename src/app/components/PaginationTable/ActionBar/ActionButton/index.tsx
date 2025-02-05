@@ -4,7 +4,7 @@ import {memo, PropsWithChildren, ReactNode, useCallback, useMemo} from 'react';
 
 import useIcon from '@/app/components/PaginationTable/ActionBar/ActionButton/hooks/useIcon';
 import {Action, ActionTypes} from '@/app/components/PaginationTable/types';
-import {PO_STATUS} from '@/app/modules/purchase-orders/types';
+import {ORDER_STATUS} from '@/app/modules/orders/types';
 import TextButton from '@/app/ui/TextButton';
 import {ApiCallFn} from '@/typings/common';
 
@@ -28,9 +28,9 @@ const ActionButton = memo<PropsWithChildren<ActionButtonProps>>(
                 case ActionTypes.DELETE:
                     return url => axios.delete(url);
 
-                case PO_STATUS.CLOSED:
-                case PO_STATUS.APPROVED:
-                case PO_STATUS.PENDING:
+                case ORDER_STATUS.CLOSED:
+                case ORDER_STATUS.APPROVED:
+                case ORDER_STATUS.PENDING:
                     return url => axios.patch(url, {status: action});
 
                 default:
