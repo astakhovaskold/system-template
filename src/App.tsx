@@ -7,13 +7,10 @@ import '@/assets/fonts/fonts.css?url';
 import AxiosInterceptorAccess from '@/app/components/Utils/AxiosInterceptorAccess';
 
 import bootstrap from '@/libs/mockApi';
-import {GenerateOrderList} from '@/libs/mockData';
 
 const App = memo((): JSX.Element | null => {
     useEffect(() => {
         bootstrap();
-
-        console.log(new GenerateOrderList().get());
     }, []);
 
     return (
