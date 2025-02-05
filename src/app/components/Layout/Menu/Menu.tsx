@@ -1,4 +1,4 @@
-import {HomeOutlined, ShoppingOutlined, UploadOutlined} from '@ant-design/icons';
+import {HomeOutlined, ShoppingOutlined} from '@ant-design/icons';
 import {memo} from 'react';
 
 import Context from './Context';
